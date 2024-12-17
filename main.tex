@@ -102,22 +102,31 @@
 \end{abstract}
 
 \begin{IEEEkeywords}
-component, formatting, style, styling, insert.
+    profunctor, creed/kit, correctness criterion, Taylor expansion, generating series
 \end{IEEEkeywords}
 
 \newcommand{\ident}{\mathrm{id}}
+\newcommand{\creed}{\mathrel{\mathtt{R}}}
+\newcommand{\Creed}{\mathit{Creed}}
+\newcommand{\Grp}{\mathcal{A}}
+\newcommand{\Grpb}{\mathcal{B}}
+\newcommand{\Grpc}{\mathcal{C}}
+\newcommand{\op}{\mathit{op}}
+
 
 \section{Creed and Kit}
-A \emph{creed} of a groupoid \( \mathcal{A} \) is a collection \( (\sim_{A,B})_{A,B \in \mathcal{A}} \) of binary relations \( ({\sim_{A,B}}) \subseteq \mathcal{A}(A,B) \times \mathcal{A}(A,B) \) such that
+A \emph{creed} of a groupoid \( \Grp \) is a collection \( (\creed_{A,B})_{A,B \in \Grp} \) of binary relations \( ({\creed_{A,B}}) \subseteq \Grp(A,B) \times \Grp(A,B) \) such that
 \begin{itemize}
-    \item \( \ident_A \sim_{A,A} \ident_A \),
-    \item \( f \sim_{A,B} f' \) and \( g \colon B \longrightarrow C \) implies \( (g \circ f) \sim_{A,C} (g \circ f') \),
-    \item \( f \sim_{A,B} f' \) and \( g \colon C \longrightarrow A \) implies \( (f \circ g) \sim_{A,C} (f' \circ g) \), and
-    \item \( f \sim_{A,A} f' \) implies \( f^n \sim_{A,A} f' \) for every natural number \( n \).
+    \item reflective (i.e.~\( f \creed_{A,A} f \)) and symmetric (i.e.~\( f \creed_{A,B} g \) implies \( g \creed_{A,B} f \)),
+    \item \( f \creed_{A,B} f' \) and \( g \colon B \longrightarrow C \) implies \( (g \circ f) \creed_{A,C} (g \circ f') \),
+    \item \( f \creed_{A,B} f' \) and \( g \colon C \longrightarrow A \) implies \( (f \circ g) \creed_{A,C} (f' \circ g) \), and
+    \item \( f \creed_{A,A} f' \) implies \( f^n \creed_{A,A} f' \) for every natural number \( n \).
 \end{itemize}
-A presheaf \( P \in \mathit{psh}(\mathcal{A}) \) induces a creed \( \sim \) defined by
+We write \( \Creed(\Grp) \) for the set of all creeds of \( \Grp \).
+
+A presheaf \( P \in \mathit{psh}(\Grp) \) induces a creed \( \creed^P \) defined by
 \begin{equation*}
-    f \sim_{A,B} g
+    f \creed^P_{A,B} g
     \quad\mbox{if and only if}\quad
     \exists x \in P(B).\: x \cdot f = x \cdot g.
 \end{equation*}
@@ -128,14 +137,22 @@ A presheaf \( P \in \mathit{psh}(\mathcal{A}) \) induces a creed \( \sim \) defi
 \end{proposition}
 
 \begin{definition}
-    A presheaf \( P \) follows a creed if and only if the induced creed is subsumed by the given creed.
+    A presheaf \( P \) follows a creed \( \creed \) if and only if \( ({\creed^P_{A,B}}) \subseteq ({\creed_{A,B}}) \) for every \( A,B \).
     %
     \qed
 \end{definition}
 
-The set of creeds is closed under the union and intersection (i.e.~if \( \sim_i \) is a collection of creeds parameterised by \( i \in I \), then so are \( \bigcap_i ({\sim_i}) \) and \( \bigcup_i ({\sim_i}) \)).
+The set \( \Creed(\Grp) \) of creeds is closed under the union and intersection (i.e.~if \( \creed_i \) is a collection of creeds parameterised by \( i \in I \), then so are \( \bigcap_i \creed_i \) and \( \bigcup_i \creed_i \)).
 The minimum creed is the equivalence on morphisms, and the maximum creed consists of all pairs.
-Creeds are \emph{orthogonal} if their intersection is the identity creed.
+
+A pair \( (\creed, \creed') \in \Creed(\Grp) \times \Creed(\Grp^\op) \) creeds are \emph{orthogonal} if \( f \creed_{A,B} g \) and \( f \creed'_{A,B} g \) implies \( f = g \) (where we identify a morphism \( f \colon A \longrightarrow B \) in \( \Grp \) with the corresponding morphism \( f \colon B \longrightarrow A \) in \( \Grp^\op \)).
+
+
+\section{Free-Action Comonoid}
+Given a category \( \mathcal{C} \), let \( {!}\mathcal{C} \) be the free symmetric strict unbiased monoidal category.
+Its object is a finite sequence of objects of \( \mathcal{C} \) and its morphism is a permutation followed by a tuple of component-wise morphisms.
+The functor \( u_{\mathcal{C}} \colon \mathcal{C} \longrightarrow !\mathcal{C} \) maps an object \( c \in \mathcal{C} \) to the singleton list \( \langle c \rangle \).
+The functor \( m_{\mathcal{C}} \colon {!}{!}\mathcal{C} \longrightarrow !\mathcal{C} \) maps a list of lists of objects to the flatten list.
 
 
 \section{Introduction}
