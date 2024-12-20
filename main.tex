@@ -53,9 +53,11 @@
 \begin{document}
 
 
-\title{On Creed-Kit Criterion on Symmetries \\ in Profunctor Model of Linear Logic
-%\thanks{Identify applicable funding agency here. If none, delete this.}
-}
+% \title{On Creed-Kit Criterion on Symmetries \\ in Profunctor Model of Linear Logic
+% %\thanks{Identify applicable funding agency here. If none, delete this.}
+% }
+
+\title{On the Creed-Kit Criterion \\ in the Profunctor Model of Linear Logic}
 
 % \author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
 % \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
@@ -146,6 +148,36 @@ The set \( \Creed(\Grp) \) of creeds is closed under the union and intersection 
 The minimum creed is the equivalence on morphisms, and the maximum creed consists of all pairs.
 
 A pair \( (\creed, \creed') \in \Creed(\Grp) \times \Creed(\Grp^\op) \) creeds are \emph{orthogonal} if \( f \creed_{A,B} g \) and \( f \creed'_{A,B} g \) implies \( f = g \) (where we identify a morphism \( f \colon A \longrightarrow B \) in \( \Grp \) with the corresponding morphism \( f \colon B \longrightarrow A \) in \( \Grp^\op \)).
+
+
+\section{Matrix Composition and Associated Creed}
+
+\newcommand{\MatTrans}[1]{\mathcal{M}({#1})}
+\newcommand{\ProfArrow}{\longrightarrow}
+\begin{theorem}
+    Let \( F \colon A \ProfArrow B \) and \( G \colon B \ProfArrow C \).
+    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \bot \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
+\end{theorem}
+\newcommand{\sem}[1]{[\![{#1}]\!]}
+\newcommand{\rsem}[1]{(\!|{#1}|\!)}
+\begin{corollary}
+    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for a correct MLL + MIX proof \( \pi \). 
+\end{corollary}
+
+
+\section{Creed-Kit Criterion}
+
+\begin{theorem}
+    An MLL proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for MLL + MIX.
+\end{theorem}
+
+
+\section{Towards a Criterion for MLL}
+
+\begin{theorem}
+    An MLL proof structure (without unit) satisfies the strict creed-kit criterion if and only if it is a correct proof-net for MLL.
+\end{theorem}
+
 
 
 \section{Free-Action Comonoid}
