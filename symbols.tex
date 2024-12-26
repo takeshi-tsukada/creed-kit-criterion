@@ -1,0 +1,177 @@
+%
+% general
+%
+\newcommand{\op}{\mathit{op}}
+\newcommand{\ident}{\mathrm{id}}
+\newcommand{\sem}[1]{\llbracket{#1}\rrbracket}
+
+%
+% category
+%
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Bifib}{\mathbf{BiFib}}
+
+\newcommand{\Coh}{\mathbf{Coh}}
+
+\newcommand{\Pol}{\mathbf{Pol}}
+\newcommand{\bpos}{\mathtt{+}}
+% \newcommand{\bpos}{\mathord{\texttt{+}}}
+\newcommand{\bneg}{\mathtt{-}}
+\newcommand{\pollt}{\S}
+
+\newcommand{\Cl}{\mathit{Cl}}
+
+\newcommand{\fib}{\mathsf{p}}
+
+%
+% logic
+%
+\newcommand{\US}{{\Uparrow}}
+\newcommand{\DS}{{\Downarrow}}
+
+\newcommand{\pnl}{\mathord{\uparrow}}
+\newcommand{\npl}{\mathord{\downarrow}}
+
+\newcommand{\TT}{\mathbf{1}}
+\newcommand{\FF}{\mathbf{0}}
+\newcommand{\PT}{\mathbf{1}}
+\newcommand{\PF}{\mathbf{0}}
+\newcommand{\NT}{\top}
+\newcommand{\NF}{\bot}
+
+\newcommand{\pprod}{\otimes}
+\newcommand{\nprod}{\&}
+\newcommand{\psum}{\oplus}
+\newcommand{\nsum}{\mathbin{{\rotatebox[origin=c]{180}{$\&$}}}}
+\newcommand{\llpar}{\mathbin{{\rotatebox[origin=c]{180}{$\&$}}}}
+\newcommand{\pneg}{\neg_{\bpos}}
+\newcommand{\nneg}{\neg_{\bneg}}
+
+\newcommand{\focused}[1]{#1_{\bullet}}
+
+
+%
+% calculus
+%
+\newcommand{\cname}{\mu\tilde{\mu}_P}
+\newcommand{\rescal}{\lambda_{R\times+}}
+
+\newcommand{\Ax}{\mathit{Ax}}
+\newcommand{\Th}{\mathit{Th}}
+
+\newcommand{\ppi}{\pi}
+\newcommand{\npi}{\overline{\pi}}
+
+\newcommand{\punit}{()}
+\newcommand{\nunit}{\overline{()}}
+
+\newcommand{\pinj}{\iota}
+\newcommand{\ninj}{\overline{\iota}}
+
+\newcommand{\pcase}[5]{\mathbf{case}({#1}, ({#2}){#3}, ({#4}){#5})}
+\newcommand{\ncase}[5]{\mathbf{case}({#1}, ({#2}){#3}, ({#4}){#5})}
+
+\newcommand{\pabs}{\Omega}
+\newcommand{\nabs}{\overline{\Omega}}
+%\newcommand{\nabs}{\mathord{{\rotatebox[origin=c]{180}{$\Omega$}}}}
+
+%% Positive/negative introduction/elimination of negation
+\newcommand{\pineg}[1]{\mathtt{not}({#1})}
+\newcommand{\nineg}[1]{\overline{\mathtt{not}}({#1})}
+\newcommand{\peneg}[1]{\overline{\mathtt{not}}^{-1}({#1})}
+\newcommand{\neneg}[1]{\mathtt{not}^{-1}({#1})}
+
+\newcommand{\ucmd}[2]{\langle {#1} \mathrel{\Rsh} {#2} \rangle}
+\newcommand{\dcmd}[2]{\langle {#1} \mathrel{{\rotatebox[origin=c]{180}{$\Rsh$}}} {#2} \rangle}
+  
+%\newcommand{\True}{\mathbf{True}}
+%\newcommand{\False}{\mathbf{False}}
+%\newcommand{\True}{1_{\times}}
+%\newcommand{\False}{0_{+}}
+\newcommand{\True}{{\it 1}}
+\newcommand{\False}{{\it 0}}
+
+\newcommand{\trans}[1]{\overline{#1}}
+
+\newcommand{\eBot}{\Bot} % \Bot for expressions
+
+
+
+
+%
+% from asdmacro.tex
+%
+\newcommand{\etap}{\eta^{\bpos}}
+%\newcommand{\etap}{\eta'}
+\newcommand{\epsn}{\varepsilon^{\bneg}}
+%\newcommand{\epsn}{\varepsilon'}
+\newcommand{\negp}{\neg_{\bpos}}
+\newcommand{\negn}{\neg_{\bneg}}
+%\newcommand{}{}
+
+\newcommand{\Rlen}{3ex}
+
+\newcommand{\sss}{\mathbb{S}}
+\newcommand{\bbb}{\mathbb{B}}
+\newcommand{\ccc}{\mathbb{C}}
+\newcommand{\ssp}{\sss_{\bpos}}
+\newcommand{\ssn}{\sss_{\bneg}}
+\newcommand{\M}{\mathcal{M}}
+
+\newcommand{\clift}[2]{\overline{#1}#2}
+\newcommand{\cl}[1]{\clift{\pollt}{#1}}
+\newcommand{\reind}[2]{{#1}^{*}#2}
+\newcommand{\ri}[1]{\reind{\pollt}{#1}}
+\newcommand{\opclift}[2]{\underline{#1}#2}
+\newcommand{\opcl}[1]{\opclift{\pollt}{#1}}
+\newcommand{\opreind}[2]{{#1}_{!}#2}
+\newcommand{\opri}[1]{\opreind{\pollt}{#1}}
+\newcommand{\ds}{{\downarrow}}
+\newcommand{\us}{{\uparrow}}
+
+\newcommand{\lap}{\langle}
+\newcommand{\rap}{\rangle}
+\newcommand{\inj}[1]{\mathrm{in}_{#1}}
+\newcommand{\prj}[1]{\mathrm{pr}_{#1}}
+\newcommand{\diag}{\Delta}
+\newcommand{\codiag}{\nabra}
+\newcommand{\fin}{\lap\rap}
+\newcommand{\ini}{[]}
+
+\newcommand{\cp}[1]{{#1}^{\bpos}}
+\newcommand{\cn}[1]{{#1}^{\bneg}}
+\newcommand{\cpn}[1]{{#1}^{\pm}}
+
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\rAdj}{\mathbf{Adj}}
+\newcommand{\LCB}{\mathbf{LCB}}
+\newcommand{\pres}[2]{{#1}_{*}{#2}}
+\newcommand{\Mod}{\mathbf{Model}}
+
+\newcommand{\xr}[1]{\xrightarrow{#1}}
+\newcommand{\xrs}[1]{\xrightarrow{\sem{#1}}}
+\newcommand{\psem}[1]{\sem{#1}^{\circ}}
+\newcommand{\model}[2]{#1 \models #2}
+\newcommand{\sig}[1]{\Sigma_{#1}}
+\newcommand{\ax}[1]{\Ax_{#1}}
+\newcommand{\ipcase}[1]{\vspace{12pt}
+\noindent\fbox{#1}}
+\newcommand{\myinfrule}[2]{\[\dfrac{#1}{#2}\]}
+
+\newcommand{\sP}[1]{\mathcal{P}_{#1}}
+\newcommand{\sN}[1]{\mathcal{N}_{#1}}
+\newcommand{\sF}[1]{\mathcal{F}_{#1}}
+\newcommand{\sG}[1]{\mathcal{G}_{#1}}
+
+\newcommand{\fnot}{\theta}
+
+\newcommand{\fc}{p} % fibred category
+
+
+
+
+
+
+
+
+

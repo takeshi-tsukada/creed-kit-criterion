@@ -8,12 +8,17 @@
 
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
+\usepackage{stmaryrd}
 \usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
+\usepackage{cleveref}
 \usepackage{xcolor}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% for LL symbols
+\usepackage{cmll}
 
 \usepackage{amsthm}
 \theoremstyle{plain}
@@ -39,6 +44,10 @@
 \definecolor{DarkGreen}{RGB}{0,120,0}
 \definecolor{DarkBlue}{RGB}{0,0,200}
 \definecolor{Cyan}{RGB}{0,139,139}
+
+
+
+\input{symbols.tex}
 
 % the marker to indicate what is changed
 \ifdraft
@@ -107,22 +116,29 @@
     profunctor, creed/kit, correctness criterion, Taylor expansion, generating series
 \end{IEEEkeywords}
 
-\newcommand{\ident}{\mathrm{id}}
-\newcommand{\creed}{\mathrel{\mathtt{R}}}
+% \newcommand{\ident}{\mathrm{id}}
+% \newcommand{\creed}{\coh}
+\newcommand{\creed}{\mathcal{A}}
+\newcommand{\creedb}{\mathcal{B}}
+\newcommand{\creedc}{\mathcal{C}}
 \newcommand{\Creed}{\mathit{Creed}}
-\newcommand{\Grp}{\mathcal{A}}
-\newcommand{\Grpb}{\mathcal{B}}
-\newcommand{\Grpc}{\mathcal{C}}
-\newcommand{\op}{\mathit{op}}
+\newcommand{\Grp}{\mathbb{A}}
+\newcommand{\Grpb}{\mathbb{B}}
+\newcommand{\Grpc}{\mathbb{C}}
+% \newcommand{\op}{\mathit{op}}
+
+\newcommand{\kit}{\mathcal{A}}
+\newcommand{\kitb}{\mathcal{B}}
+\newcommand{\kitc}{\mathcal{C}}
 
 
 \section{Creed and Kit}
-A \emph{creed} of a groupoid \( \Grp \) is a collection \( (\creed_{A,B})_{A,B \in \Grp} \) of binary relations \( ({\creed_{A,B}}) \subseteq \Grp(A,B) \times \Grp(A,B) \) such that
+A \emph{creed} of a groupoid \( \Grp \) is a collection \( (\creed^{a,b})_{a,b \in \Grp} \) of binary relations \( ({\creed^{a,b}}) \subseteq \Grp(a,b) \times \Grp(a,b) \) such that
 \begin{itemize}
-    \item reflective (i.e.~\( f \creed_{A,A} f \)) and symmetric (i.e.~\( f \creed_{A,B} g \) implies \( g \creed_{A,B} f \)),
-    \item \( f \creed_{A,B} f' \) and \( g \colon B \longrightarrow C \) implies \( (g \circ f) \creed_{A,C} (g \circ f') \),
-    \item \( f \creed_{A,B} f' \) and \( g \colon C \longrightarrow A \) implies \( (f \circ g) \creed_{A,C} (f' \circ g) \), and
-    \item \( f \creed_{A,A} f' \) implies \( f^n \creed_{A,A} f' \) for every natural number \( n \).
+    \item reflective (i.e.~\( f \creed^{a,a} f \)) and symmetric (i.e.~\( f \creed^{a,b} g \) implies \( g \creed^{a,b} f \)),
+    \item \( f \creed^{a,b} f' \) and \( g \colon b \longrightarrow c \) implies \( (g \circ f) \creed^{a,c} (g \circ f') \),
+    \item \( f \creed^{a,b} f' \) and \( g \colon c \longrightarrow a \) implies \( (f \circ g) \creed^{a,c} (f' \circ g) \), and
+    \item \( f \creed^{a,a} g \) implies \( f^n \creed_{a,a} g^n \) for every natural number \( n \).
 \end{itemize}
 We write \( \Creed(\Grp) \) for the set of all creeds of \( \Grp \).
 
@@ -149,6 +165,45 @@ The minimum creed is the equivalence on morphisms, and the maximum creed consist
 
 A pair \( (\creed, \creed') \in \Creed(\Grp) \times \Creed(\Grp^\op) \) creeds are \emph{orthogonal} if \( f \creed_{A,B} g \) and \( f \creed'_{A,B} g \) implies \( f = g \) (where we identify a morphism \( f \colon A \longrightarrow B \) in \( \Grp \) with the corresponding morphism \( f \colon B \longrightarrow A \) in \( \Grp^\op \)).
 
+\newcommand{\orthogonal}{\mathrel{\bot}}
+We write \( \creed^\bot \) for the maximum creed on \( \Grp^\op \) such that \( \creed \orthogonal \creed^\bot \).
+Then \( ({-})^{\bot\bot} \) is a closure operator.
+
+\newcommand{\Int}{\mathbb{Z}}
+
+\begin{equation*}
+    f \in \creed^\bot
+    \quad\Leftrightarrow\quad
+    \forall k \in \Int. f^k \notin (\creed \setminus \{ \ident \})
+\end{equation*}
+
+Let \( \kit = (\Grp, \creed_\kit) \) and \( \kitb = (\Grpb, \creed_\kitb) \) be creeds.
+\begin{equation*}
+    \creed \otimes \creedb := \{ ((f, g), (f', g')) \mid f \creed_\kit f', g \creed_\kitb g' \}^{\bot\bot}
+\end{equation*}
+\begin{equation*}
+    \creed \otimes \creedb := (\creed \times \creedb)^{\bot\bot}
+\end{equation*}
+\begin{equation*}
+    ({\creed_{\kit \llpar \kitb}}) := \{ ((f, g), (f', g')) \mid f \creed_\kit f', g \creed_\kitb g' \}^{\bot\bot}
+\end{equation*}
+\begin{equation*}
+    \creed \llpar \creedb := (\creed^\bot \times \creedb^\bot)^\bot
+\end{equation*}
+
+Hence \( (f, g) \in \creed \llpar \creedb \) if and only if \( \{ (f^k, g^k) \mid k \in \Int \} \cap (\creed^\bot \times \creedb^\bot) = \{ (\ident, \ident) \} \) if and only if \( \forall k \in \Int. (f^k, g^k) \neq (\ident, \ident) \Longrightarrow (f^k \notin \creed^\bot \vee f^k \notin \creedb^\bot \) if and only if \( \forall k \in \Int. (f^k, g^k) \neq (\ident, \ident) \Longrightarrow \exists m. (f^{km} \in (\creed \setminus \{\ident\})) \vee (g^{km} \in (\creedb \setminus \{\ident\})) \).
+
+\begin{example}
+    Let \( \Grp = \Int_2 \times \Int_3 \) and \( \creed = \Int_2 \times \{0\} \).
+    Then \( \creed^\bot = \{0\}\times \Int_3 \).
+    To see this, assume \( (n,m) \in \Int_2 \times \Int_3 \).
+    We have \( (n,m) \in \creed^\bot \) if and only if, for every \( k \), if \( (kn, km) \neq (0,0) \), then \( (kn, km) \notin \creed \).
+    It is easy to see that \( (0,m) \in \creed^\bot \).
+    Assume that \( (n,m) \in \creed^\bot \) with \( n \neq 0 \).
+    Then \( (3n, 3m) = (n, 0) \in \creed \) must hold, a contradiction.
+    Hence \( \creed^\bot = \{ 0 \} \times \Int_3 \).
+\end{example}
+
 
 \section{Matrix Composition and Associated Creed}
 
@@ -158,8 +213,11 @@ A pair \( (\creed, \creed') \in \Creed(\Grp) \times \Creed(\Grp^\op) \) creeds a
     Let \( F \colon A \ProfArrow B \) and \( G \colon B \ProfArrow C \).
     Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \bot \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
 \end{theorem}
-\newcommand{\sem}[1]{[\![{#1}]\!]}
+% \newcommand{\sem}[1]{[\![{#1}]\!]}
 \newcommand{\rsem}[1]{(\!|{#1}|\!)}
+\begin{corollary}
+    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for every sequent calculus proof \( \pi \) of LL + MIX.
+\end{corollary}
 \begin{corollary}
     \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for a correct MLL + MIX proof \( \pi \). 
 \end{corollary}
@@ -170,6 +228,13 @@ A pair \( (\creed, \creed') \in \Creed(\Grp) \times \Creed(\Grp^\op) \) creeds a
 \begin{theorem}
     An MLL proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for MLL + MIX.
 \end{theorem}
+
+
+\begin{theorem}
+    An MLL proof structure (without unit) \( \pi \) is a correct proofnet for MLL + MIX if and only if, for every substitution \( \vartheta \) of propositional variables in \( \pi \) and every correct proof-net \( \pi' \), \( \rsem{\mathsf{cut}(\pi\vartheta, \pi')} = \MatTrans{\sem{\mathsf{cut}(\pi\vartheta, \pi')}} \). 
+\end{theorem}
+
+\tk{to do: creed-kit criterion for non-cut-free proof structures}
 
 
 \section{Towards a Criterion for MLL}
