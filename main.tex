@@ -8,6 +8,7 @@
 
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathtools}
 \usepackage{stmaryrd}
 \usepackage{algorithmic}
 \usepackage{graphicx}
@@ -26,6 +27,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem*{proposition*}{Proposition}
 \newtheorem*{claim*}{Claim}
 
@@ -47,7 +49,7 @@
 
 
 
-\input{symbols.tex}
+\input{symbols}
 
 % the marker to indicate what is changed
 \ifdraft
@@ -131,87 +133,15 @@
 \newcommand{\kitb}{\mathcal{B}}
 \newcommand{\kitc}{\mathcal{C}}
 
-
-\section{Creed and Kit}
-A \emph{creed} of a groupoid \( \Grp \) is a collection \( (\creed^{a,b})_{a,b \in \Grp} \) of binary relations \( ({\creed^{a,b}}) \subseteq \Grp(a,b) \times \Grp(a,b) \) such that
-\begin{itemize}
-    \item reflective (i.e.~\( f \creed^{a,a} f \)) and symmetric (i.e.~\( f \creed^{a,b} g \) implies \( g \creed^{a,b} f \)),
-    \item \( f \creed^{a,b} f' \) and \( g \colon b \longrightarrow c \) implies \( (g \circ f) \creed^{a,c} (g \circ f') \),
-    \item \( f \creed^{a,b} f' \) and \( g \colon c \longrightarrow a \) implies \( (f \circ g) \creed^{a,c} (f' \circ g) \), and
-    \item \( f \creed^{a,a} g \) implies \( f^n \creed_{a,a} g^n \) for every natural number \( n \).
-\end{itemize}
-We write \( \Creed(\Grp) \) for the set of all creeds of \( \Grp \).
-
-A presheaf \( P \in \mathit{psh}(\Grp) \) induces a creed \( \creed^P \) defined by
-\begin{equation*}
-    f \creed^P_{A,B} g
-    \quad\mbox{if and only if}\quad
-    \exists x \in P(B).\: x \cdot f = x \cdot g.
-\end{equation*}
-
-\begin{proposition}
-    Every creed is the induced creed of a presheaf.
-    \tk{to do: give a proof}
-\end{proposition}
-
-\begin{definition}
-    A presheaf \( P \) follows a creed \( \creed \) if and only if \( ({\creed^P_{A,B}}) \subseteq ({\creed_{A,B}}) \) for every \( A,B \).
-    %
-    \qed
-\end{definition}
-
-The set \( \Creed(\Grp) \) of creeds is closed under the union and intersection (i.e.~if \( \creed_i \) is a collection of creeds parameterised by \( i \in I \), then so are \( \bigcap_i \creed_i \) and \( \bigcup_i \creed_i \)).
-The minimum creed is the equivalence on morphisms, and the maximum creed consists of all pairs.
-
-A pair \( (\creed, \creed') \in \Creed(\Grp) \times \Creed(\Grp^\op) \) creeds are \emph{orthogonal} if \( f \creed_{A,B} g \) and \( f \creed'_{A,B} g \) implies \( f = g \) (where we identify a morphism \( f \colon A \longrightarrow B \) in \( \Grp \) with the corresponding morphism \( f \colon B \longrightarrow A \) in \( \Grp^\op \)).
-
-\newcommand{\orthogonal}{\mathrel{\bot}}
-We write \( \creed^\bot \) for the maximum creed on \( \Grp^\op \) such that \( \creed \orthogonal \creed^\bot \).
-Then \( ({-})^{\bot\bot} \) is a closure operator.
-
-\newcommand{\Int}{\mathbb{Z}}
-
-\begin{equation*}
-    f \in \creed^\bot
-    \quad\Leftrightarrow\quad
-    \forall k \in \Int. f^k \notin (\creed \setminus \{ \ident \})
-\end{equation*}
-
-Let \( \kit = (\Grp, \creed_\kit) \) and \( \kitb = (\Grpb, \creed_\kitb) \) be creeds.
-\begin{equation*}
-    \creed \otimes \creedb := \{ ((f, g), (f', g')) \mid f \creed_\kit f', g \creed_\kitb g' \}^{\bot\bot}
-\end{equation*}
-\begin{equation*}
-    \creed \otimes \creedb := (\creed \times \creedb)^{\bot\bot}
-\end{equation*}
-\begin{equation*}
-    ({\creed_{\kit \llpar \kitb}}) := \{ ((f, g), (f', g')) \mid f \creed_\kit f', g \creed_\kitb g' \}^{\bot\bot}
-\end{equation*}
-\begin{equation*}
-    \creed \llpar \creedb := (\creed^\bot \times \creedb^\bot)^\bot
-\end{equation*}
-
-Hence \( (f, g) \in \creed \llpar \creedb \) if and only if \( \{ (f^k, g^k) \mid k \in \Int \} \cap (\creed^\bot \times \creedb^\bot) = \{ (\ident, \ident) \} \) if and only if \( \forall k \in \Int. (f^k, g^k) \neq (\ident, \ident) \Longrightarrow (f^k \notin \creed^\bot \vee f^k \notin \creedb^\bot \) if and only if \( \forall k \in \Int. (f^k, g^k) \neq (\ident, \ident) \Longrightarrow \exists m. (f^{km} \in (\creed \setminus \{\ident\})) \vee (g^{km} \in (\creedb \setminus \{\ident\})) \).
-
-\begin{example}
-    Let \( \Grp = \Int_2 \times \Int_3 \) and \( \creed = \Int_2 \times \{0\} \).
-    Then \( \creed^\bot = \{0\}\times \Int_3 \).
-    To see this, assume \( (n,m) \in \Int_2 \times \Int_3 \).
-    We have \( (n,m) \in \creed^\bot \) if and only if, for every \( k \), if \( (kn, km) \neq (0,0) \), then \( (kn, km) \notin \creed \).
-    It is easy to see that \( (0,m) \in \creed^\bot \).
-    Assume that \( (n,m) \in \creed^\bot \) with \( n \neq 0 \).
-    Then \( (3n, 3m) = (n, 0) \in \creed \) must hold, a contradiction.
-    Hence \( \creed^\bot = \{ 0 \} \times \Int_3 \).
-\end{example}
+\input{creed}
 
 
 \section{Matrix Composition and Associated Creed}
 
 \newcommand{\MatTrans}[1]{\mathcal{M}({#1})}
-\newcommand{\ProfArrow}{\longrightarrow}
 \begin{theorem}
-    Let \( F \colon A \ProfArrow B \) and \( G \colon B \ProfArrow C \).
-    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \bot \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
+    Let \( F \colon A \profarrow B \) and \( G \colon B \profarrow C \).
+    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
 \end{theorem}
 % \newcommand{\sem}[1]{[\![{#1}]\!]}
 \newcommand{\rsem}[1]{(\!|{#1}|\!)}
@@ -223,25 +153,10 @@ Hence \( (f, g) \in \creed \llpar \creedb \) if and only if \( \{ (f^k, g^k) \mi
 \end{corollary}
 
 
-\section{Creed-Kit Criterion}
-
-\begin{theorem}
-    An MLL proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for MLL + MIX.
-\end{theorem}
 
 
-\begin{theorem}
-    An MLL proof structure (without unit) \( \pi \) is a correct proofnet for MLL + MIX if and only if, for every substitution \( \vartheta \) of propositional variables in \( \pi \) and every correct proof-net \( \pi' \), \( \rsem{\mathsf{cut}(\pi\vartheta, \pi')} = \MatTrans{\sem{\mathsf{cut}(\pi\vartheta, \pi')}} \). 
-\end{theorem}
-
-\tk{to do: creed-kit criterion for non-cut-free proof structures}
-
-
-\section{Towards a Criterion for MLL}
-
-\begin{theorem}
-    An MLL proof structure (without unit) satisfies the strict creed-kit criterion if and only if it is a correct proof-net for MLL.
-\end{theorem}
+\input{criterion}
+\input{mixless}
 
 
 
@@ -252,6 +167,13 @@ The functor \( u_{\mathcal{C}} \colon \mathcal{C} \longrightarrow !\mathcal{C} \
 The functor \( m_{\mathcal{C}} \colon {!}{!}\mathcal{C} \longrightarrow !\mathcal{C} \) maps a list of lists of objects to the flatten list.
 
 
+\section{Full completeness?}
+Try to give a full completeness result.
+It suffices to find a class of profunctors that can be obtained as an interpretation of proof-structure (not necessarily correct).
+Then this condition together with the creed-kit criterion gives a characterisation of denotations of correct proof-structures.
+
+
+\iffalse
 \section{Introduction}
 This document is a model and instructions for \LaTeX.
 Please observe the conference page limits. For more information about how to become an IEEE Conference author or how to write your paper, please visit   IEEE Conference Author Center website: https://conferences.ieeeauthorcenter.ieee.org/.
@@ -473,5 +395,6 @@ citation first, followed by the original foreign-language citation \cite{b6}.
 \vspace{12pt}
 \color{red}
 IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
+\fi
 
 \end{document}

@@ -1,0 +1,171 @@
+\section{Creed and Kit}
+
+\begin{definition}[Creed]
+    A \emph{creed} of a groupoid \( \Grp \) is a collection \( (\creed(a))_{a \in \Grp} \) of subsets \( \creed(a) \subseteq \Grp(a,a) \) of endo-morphisms such that
+    \begin{itemize}
+        \item \( \ident_a \in \creed(a) \),
+        \item \( g \in \creed(a) \) implies \( g^k \in \creed(a) \) for every \( k \in \Int \), and
+        \item \( g \in \creed(a) \) and \( f \in \Grp(a,b) \) implies \( f \circ g \circ f^{-1} \in \creed(b) \).
+    \end{itemize}
+    Note that \( \creed(a) \) is not necessarily closed under composition.
+    We write \( \Creed(\Grp) \) for the set of all creeds of \( \Grp \).
+    %
+    \qed
+\end{definition}
+
+We regard the set \( \Creed(\Grp) \) of creeds as a poset by the component-wise inclusion: \( \creed \subseteq \creed' \) is defined as \( \forall a \in \Grp. \creed(a) \subseteq \creed'(a) \).
+The set \( \Creed(\Grp) \) of creeds is closed under the union and intersection.
+That means, if \( \creed_i \) is a collection of creeds parameterised by \( i \in I \), then the collections \( \creed = (\creed(a))_a \) and \( \creed' = (\creed'(a))_i \) given by \( \creed(a) \defeq \bigcup_i \creed_i(a) \) and \( \creed'(a) \defeq \bigcap_i \creed_i(a) \) are creeds.
+We write \( \creed \defeq \bigcup_i \creed_i \) and \( \creed' \defeq \bigcap_i \creed_i \).
+The minimum creed consists only of the identities, and the maximum creed has all endo-morphisms.
+
+A presheaf \( P \in \mathit{psh}(\Grp) \) induces a creed \( \creed^P \) defined by
+\begin{equation*}
+    g \in \creed^P(a)
+    \quad\mbox{if and only if}\quad
+    \exists x \in P(a).\: x \cdot g = x.
+\end{equation*}
+
+\begin{proposition}
+    Every creed is the induced creed of a presheaf.
+\end{proposition}
+\begin{proof}
+    Let \( \Grp \) be a groupoid.
+    For every endo-morphism \( g \in \Grp(a,a) \), we define a presheaf \( P_g \in \mathit{psh}(\Grp) \) by
+    \begin{equation*}
+        P_g(b)
+        \:\defeq\:
+        \big\{ \{ g^k \circ f \mid k \in \Int \} ~\big|~ f \in \Grp(b,a) \big\}
+        \:\subseteq\:
+        \Powerset(\Grp(b,a))
+    \end{equation*}
+    The action \( P_g(f) \) of \( f \colon b' \to b \) in \( \Grp \) is given by \( P_g(f)(X) := \{ h \circ f \mid h \in X \} \).
+    The induced creed \( \creed^{P_g} \) contains \( g \) since \( \{ g^k \mid k \in \Int \} \in P_g(a) \) and \( P_g(g) \) fixes this element.
+    We show that \( P_g \) is the minimum creed that contains \( g \).
+    Assume \( f \in \creed^{P_g}(b) \).
+    Then there exists \( h \in \Grp(b,a) \) such that \( \{ g^k \circ h \mid k \in \Int \} = \{ g^k \circ h \circ f \mid k \in \Int \} \).
+    Then \( h \circ f = g^k \circ h \) for some \( k \in \Int \).
+    Therefore \( f = h^{-1} \circ g^k \circ h \).
+    Let \( \creed' \) be a creed such that \( g \in \creed'(a) \).
+    Then \( g^k \in \creed'(a) \) and hence \( f = h^{-1} \circ g^k \circ h \in \creed'(a) \).
+    Since \( f \in \creed^{P_g}(b) \) is arbitrary, this means that \( P_g \) is the minimum creed among those containing \( g \).
+
+    Then a given \( \creed \) is the induced creed of the profunctor \( \coprod_{g \in \creed(a)} P_g \).
+\end{proof}
+
+\begin{definition}
+    A presheaf \( P \) follows a creed \( \creed \) if and only if \( \creed^P(a) \subseteq \creed(a) \) for every \( a \in \Grp \).
+    %
+    \qed
+\end{definition}
+
+A pair \( (\creed, \creed') \in \Creed(\Grp) \times \Creed(\Grp^\op) \) of creeds are \emph{orthogonal}, written \( \creed \orthogonal \creed' \), if \( \creed(a) \cap \creed'(a) = \{ \ident_a \} \) for every \( a \in \Grp \) (where we identify a morphism \( f \colon a \longrightarrow b \) in \( \Grp \) with the corresponding morphism \( b \longrightarrow a \) in \( \Grp^\op \)).
+The orthogonality is symmetric: \( \creed \orthogonal \creed' \) implies \( \creed' \orthogonal \creed \).
+
+Given a creed \( \creed \) on \( \Grp \), we write \( \creed^\bot \) for the maximum creed on \( \Grp^\op \) orthogonal to \( \creed \).
+That means,
+\begin{equation*}
+    \creed^\bot
+    \quad\defeq\quad
+    \bigcup \{ \creed' \in \Creed(\Grp^\op) \mid \creed \orthogonal \creed' \}.
+\end{equation*}
+Then \( ({-})^{\bot\bot} \) is a closure operator.
+An explicit definition can be given by
+\begin{equation*}
+    g \in \creed^\bot(a)
+    \quad\Leftrightarrow\quad
+    \forall k \in \Int.\: g^k \notin (\creed(a) \setminus \{ \ident_a \})
+\end{equation*}
+
+\begin{example}
+    Let \( \Grp \) be a single-object groupoid such that \( \Grp(\star, \star) = \Int_2 \times \Int_3 \) for the unique object \( \star \).
+    Let \( \creed = \Int_2 \times \{0\} \) be a creed on \( \Grp \).
+    Then \( \creed^\bot = \{0\}\times \Int_3 \).
+    To see this, assume \( (n,m) \in \Int_2 \times \Int_3 \).
+    We have \( (n,m) \in \creed^\bot \) if and only if, for every \( k \), if \( (kn, km) \neq (0,0) \), then \( (kn, km) \notin \creed \).
+    It is easy to see that \( (0,m) \in \creed^\bot \).
+    Assume that \( (n,m) \in \creed^\bot \) with \( n \neq 0 \).
+    Then \( (3n, 3m) = (n, 0) \in \creed \) must hold, a contradiction.
+    Hence \( \creed^\bot = \{ 0 \} \times \Int_3 \).
+    %
+    \qed
+\end{example}
+
+A creed \( \creed \) on \( \Grp \) divides endo-morphisms \( g \in \Grp(a,a) \) into four classes:
+(1) the identity, which belongs to both \( \creed(a) \) and \( \creed^\bot(a) \),
+(2) \emph{positive} ones \( g \in (\creed(a) \setminus \creed^\bot(a)) \),
+(3) \emph{negative} ones \( g \in (\creed^\bot(a) \setminus \creed(a)) \), and
+(4) \emph{neutral} ones \( g \in (\Grp(a,a) \setminus (\creed(a) \cup \creed^\bot(a))) \).
+We write \( \creed^{\boxplus} \), \( \creed^{\boxminus} \) and \( \creed^\blacksquare \) for the set of positive, negative and neutral elements, respectively.
+By using this notation, \( g \in \creed^\bot(a) \) if and only if \( \forall k \in \Int.\: g^k \notin \creed^\boxplus \).
+
+Let \( \creed = (\Grp, \creed) \) and \( \creedb = (\Grpb, \creedb) \) be creeds.
+We define creeds \( \creed \otimes \creedb \) and \( \creed \llpar \creedb \) on \( \Grp \times \Grpb \) by
+\begin{align*}
+    (\creed \otimes \creedb)(a,b) 
+    &:= (\creed(a) \times \creedb(b))^{\bot\bot} \\
+    (\creed \llpar \creedb)(a,b)
+    &:= (\creed^\bot(a) \times \creedb^\bot(b))^\bot.
+\end{align*}
+% \begin{equation*}
+%     (\creed \otimes \creedb)(a,b) := \{ ((f, g), (f', g')) \mid f \creed_\kit f', g \creed_\kitb g' \}^{\bot\bot}
+% \end{equation*}
+% \begin{equation*}
+%     \creed \otimes \creedb := (\creed \times \creedb)^{\bot\bot}
+% \end{equation*}
+% \begin{equation*}
+%     ({\creed_{\kit \llpar \kitb}}) := \{ ((f, g), (f', g')) \mid f \creed_\kit f', g \creed_\kitb g' \}^{\bot\bot}
+% \end{equation*}
+% \begin{equation*}
+%     \creed \llpar \creedb := (\creed^\bot \times \creedb^\bot)^\bot
+% \end{equation*}
+
+\begin{remark}
+    \tk{to do: give comparison between creed by Taylor and kit by Fiore+.  Our definition uses creeds, but the operators are similar to kit operators (and Taylor's operations are not directly follow Hyland-Schalk)}
+    %
+    \qed
+\end{remark}
+
+Hence \( (g, h) \in (\creed \llpar \creedb)(a,b) \) if and only if \( \{ (g^k, h^k) \mid k \in \Int \} \cap (\creed^\bot(a) \times \creedb^\bot(b)) = \{ (\ident_a, \ident_b) \} \) if and only if \( \forall k \in \Int. (g^k, h^k) \neq (\ident_a, \ident_b) \Longrightarrow (g^k \notin \creed^\bot(a) \vee h^k \notin \creedb^\bot(b)) \) if and only if \( \forall k \in \Int. (g^k, h^k) \neq (\ident_a, \ident_b) \Longrightarrow \exists m. (g^{km} \in \creed^\boxplus(a) \vee h^{km} \in \creedb^\boxplus(b)) \).
+
+% \begin{align*}
+%     & (g,h) \in (\creed \otimes \creedb)^{\boxplus}(a,b)
+%     \\ &
+%     \quad\Longleftrightarrow
+%     \forall k \in \Int. \exists m \in \Int.\ g^{km} \in \creed^{\boxplus}(a) \vee h^{km} \in \creedb^{\boxplus}(b)
+% \end{align*}
+
+\begin{align*}
+    & (g,h) \in (\creed \llpar \creedb)(a,b)
+    \\ &
+    \quad\Longleftrightarrow
+    \forall k \in \Int. (g^k, h^k) = (\ident_a, \ident_b) \vee {}
+    \\ &
+    \quad\qquad\qquad \exists m \in \Int.\ g^{km} \in \creed^{\boxplus}(a) \vee h^{km} \in \creedb^
+    {\boxplus}(b)
+\end{align*}
+
+Hence \( (g, h) \in (\creed \otimes \creedb)(a,b) \) if and only if \( \{ (g^k, h^k) \mid k \in \Int \} \cap (\creed(a) \times \creedb(b))^\bot = \{ (\ident_a, \ident_b) \} \) if and only if \( \forall k \in \Int. (g^k, h^k) \neq (\ident_a, \ident_b) \Longrightarrow (g^k, h^k) \notin (\creed(a) \times \creed(b))^\bot \) if and only if \( \forall k \in \Int. (g^k, h^k) \neq (\ident_a, \ident_b) \Longrightarrow \exists m. (g^{km} \in \creed^\boxplus(a) \wedge h^{km} \in \creedb^\boxplus(b)) \).
+
+\begin{align*}
+    & (g,h) \in (\creed \otimes \creedb)(a,b)
+    \\ &
+    \quad\Longleftrightarrow
+    \forall k \in \Int. (g^k, h^k) = (\ident_a, \ident_b) \vee {}
+    \\ &
+    \quad\qquad\qquad \exists m \in \Int.\ g^{km} \in \creed^{\boxplus}(a) \wedge h^{km} \in \creedb^
+    {\boxplus}(b)
+\end{align*}
+
+\begin{example}
+    Let \( \Grp \) be a groupoid and \( \creed \) be a creed on \( \Grp \).
+    For every \( h \in \Grp(a,a) \), we have \( (h,h) \in (\creed \llpar \creed^{\bot})(a,a) \).
+    Let \( k \in \Int \) be an arbitrary integer and assume \( h^k \neq \ident_a \).
+    If \( \{ h^{km} \mid m \in \Int \} \cap \creed(a)^\boxplus \neq \emptyset \), then \( (h,h) \in (\creed \llpar \creed^{\bot})(a,a) \).
+    Otherwise, \( h^{k} \in \creed^\bot(a) \) and hence \( h^k \in (\creed^\bot)^\boxplus(a) \).
+    So \( (h,h) \in (\creed \llpar \creed^{\bot})(a,a) \) in this case, too.
+    %
+    \qed
+\end{example}
+
+\tk{what is the problem when we define \( \creed \otimes \creedb := \creed \times \creedb \) and \( \creed \llpar \creedb := \{ (g,h) \mid g \in \creed \vee h \in \creedb \} \)?}

@@ -1,177 +1,113 @@
-%
+% Luke's macros
+\newcommand\set[1]{\{#1\}}
+\newcommand\simcl[1]{\widetilde{#1}}
+\newcommand\Deri{\mathcal{D}}
+\newcommand\Var{\mathit{Var}}
+\newcommand\lohide[1]{}
+\newcommand\FCF{\hbox{\rm FCF}}
+%\newcommand\ndlamy{{\lambda\Y_\oplus}}
+\newcommand\ndlamy{{\lambda_{\rm nd}\Y}}
+
+\newcommand{\Powerset}{\mathcal{P}}
+
+\newcommand{\Int}{\mathbb{Z}}
+\newcommand{\defeq}{:=}
+\newcommand{\orthogonal}{\mathrel{\bot}}
+
+% \newcommand{\llpar}{\mathbin{\rotatebox[origin=c]{180}{\&}}}
+\newcommand{\llpar}{\invamp}
+
+\newcommand{\profarrow}{\mathrel{\relbar\joinrel\mapstochar\rightarrow}}
+
 % general
-%
-\newcommand{\op}{\mathit{op}}
+\newcommand{\red}{\longrightarrow}
+\newcommand{\evalto}{\hookrightarrow}
 \newcommand{\ident}{\mathrm{id}}
+%\newcommand{\sem}[1]{[\![{#1}]\!]}
 \newcommand{\sem}[1]{\llbracket{#1}\rrbracket}
+\newcommand{\op}{\mathrm{op}}
 
-%
+\newcommand{\TmRef}{\lhd}
+\newcommand{\TyRef}{\lhd}
+\newcommand{\TmRefInv}{\rhd}
+
+\newcommand{\udstackrel}[3]{\mathrel{\mathop{#3}\limits^{#1}_{#2}}}
+
+\newcommand{\Sym}[1]{\mathfrak{S}_{#1}}
+
+\newcommand{\Seq}[1]{\langle{#1}\rangle}
+
+\newcommand{\Boehm}[1]{\mathit{BT}({#1})}
+
 % category
-%
+\newcommand{\FreeTensor}{\mathbb{P}}
 \newcommand{\Set}{\mathbf{Set}}
-\newcommand{\Bifib}{\mathbf{BiFib}}
 
-\newcommand{\Coh}{\mathbf{Coh}}
+\newcommand{\Rel}{\mathbf{Rel}}
+\newcommand{\MRel}{\mathbf{Rel}_{!}}
 
-\newcommand{\Pol}{\mathbf{Pol}}
-\newcommand{\bpos}{\mathtt{+}}
-% \newcommand{\bpos}{\mathord{\texttt{+}}}
-\newcommand{\bneg}{\mathtt{-}}
-\newcommand{\pollt}{\S}
-
-\newcommand{\Cl}{\mathit{Cl}}
-
-\newcommand{\fib}{\mathsf{p}}
-
-%
-% logic
-%
-\newcommand{\US}{{\Uparrow}}
-\newcommand{\DS}{{\Downarrow}}
-
-\newcommand{\pnl}{\mathord{\uparrow}}
-\newcommand{\npl}{\mathord{\downarrow}}
-
-\newcommand{\TT}{\mathbf{1}}
-\newcommand{\FF}{\mathbf{0}}
-\newcommand{\PT}{\mathbf{1}}
-\newcommand{\PF}{\mathbf{0}}
-\newcommand{\NT}{\top}
-\newcommand{\NF}{\bot}
-
-\newcommand{\pprod}{\otimes}
-\newcommand{\nprod}{\&}
-\newcommand{\psum}{\oplus}
-\newcommand{\nsum}{\mathbin{{\rotatebox[origin=c]{180}{$\&$}}}}
-\newcommand{\llpar}{\mathbin{{\rotatebox[origin=c]{180}{$\&$}}}}
-\newcommand{\pneg}{\neg_{\bpos}}
-\newcommand{\nneg}{\neg_{\bneg}}
-
-\newcommand{\focused}[1]{#1_{\bullet}}
+\newcommand{\ESP}{\mathbf{ESP}}
+\newcommand{\Prof}{\mathbf{Prof}}
 
 
-%
-% calculus
-%
-\newcommand{\cname}{\mu\tilde{\mu}_P}
-\newcommand{\rescal}{\lambda_{R\times+}}
+% terms
+\newcommand{\BTT}{\mathtt{t}\!\mathtt{t}}
+\newcommand{\BFF}{\mathtt{f}\!\mathtt{f}}
 
-\newcommand{\Ax}{\mathit{Ax}}
-\newcommand{\Th}{\mathit{Th}}
+\newcommand{\rembranch}[1]{|{#1}|}
 
-\newcommand{\ppi}{\pi}
-\newcommand{\npi}{\overline{\pi}}
+% Types
+\newcommand{\TBool}{\mathtt{bool}}
+\newcommand{\TNat}{\mathtt{nat}}
+\newcommand{\qubit}{\mathbf{qubit}}
+\newcommand{\TB}{\mathtt{o}}
+\newcommand{\TBB}{\star}
 
-\newcommand{\punit}{()}
-\newcommand{\nunit}{\overline{()}}
+% Terms
+\newcommand{\TSkip}{\mathtt{skip}}
+\newcommand{\TLet}[3]{\mathtt{let}\,{#1} = {#2}\,\mathtt{in}\,{#3}}
+\newcommand{\TNondet}[2]{{#1} \oplus {#2}}
+\newcommand{\TBL}[1]{{#1}\oplus\bullet}
+\newcommand{\TBR}[1]{\bullet\oplus{#1}}
+%% \newcommand{\TBL}[1]{\mathtt{L}; {#1}}
+%% \newcommand{\TBR}[1]{\mathtt{R}; {#1}}
+\newcommand{\TMatch}[3]{\mathtt{match}\;{#1}\;\mathtt{with}\;{#2} \mapsto {#3}}
+%\newcommand{\TIf}[3]{\mathtt{if}\;{#1}\;\mathtt{then}\;{#2}\;\mathtt{else}\;{#3}}
+\newcommand{\TIf}[3]{\mathtt{if}\;{#1}\;{#2}\;{#3}}
+%% \newcommand{\TIfThen}[2]{\mathtt{if}\;{#1}\;\mathtt{then}\;{#2}}
+%% \newcommand{\TIfElse}[2]{\mathtt{if}\;{#1}\;\mathtt{else}\;{#2}}
+\newcommand{\TIfThen}[2]{\TIf{#1}{#2}{\bullet}}
+\newcommand{\TIfElse}[2]{\TIf{#1}{\bullet}{#2}}
+\newcommand{\TSplit}{\mathtt{split}}
+\newcommand{\TLetrec}[3]{\mathtt{letrec}\,{#1} = {#2}\,\mathtt{in}\,{#3}}
+\newcommand{\TMeas}{\mathtt{meas}}
+\newcommand{\TNew}{\mathtt{new}}
+\newcommand{\TIszero}{\mathtt{iszero}}
+\newcommand{\TSucc}{\mathtt{succ}}
+\newcommand{\TPred}{\mathtt{pred}}
 
-\newcommand{\pinj}{\iota}
-\newcommand{\ninj}{\overline{\iota}}
+\newcommand{\CNat}[1]{\underline{#1}}
+\newcommand{\CSucc}{\mathtt{s}}
+\newcommand{\CPred}{\mathtt{p}}
+\newcommand{\Ifzero}[3]{\mathtt{ifzero}\,{#1}\,\mathtt{then}\,{#2}\,\mathtt{else}\,{#3}}
 
-\newcommand{\pcase}[5]{\mathbf{case}({#1}, ({#2}){#3}, ({#4}){#5})}
-\newcommand{\ncase}[5]{\mathbf{case}({#1}, ({#2}){#3}, ({#4}){#5})}
+\newcommand{\Y}{\mathbf{Y}}
+\newcommand{\CRand}{\mathtt{rand}}
 
-\newcommand{\pabs}{\Omega}
-\newcommand{\nabs}{\overline{\Omega}}
-%\newcommand{\nabs}{\mathord{{\rotatebox[origin=c]{180}{$\Omega$}}}}
+\newcommand{\NF}{\mathsf{nf}}
 
-%% Positive/negative introduction/elimination of negation
-\newcommand{\pineg}[1]{\mathtt{not}({#1})}
-\newcommand{\nineg}[1]{\overline{\mathtt{not}}({#1})}
-\newcommand{\peneg}[1]{\overline{\mathtt{not}}^{-1}({#1})}
-\newcommand{\neneg}[1]{\mathtt{not}^{-1}({#1})}
-
-\newcommand{\ucmd}[2]{\langle {#1} \mathrel{\Rsh} {#2} \rangle}
-\newcommand{\dcmd}[2]{\langle {#1} \mathrel{{\rotatebox[origin=c]{180}{$\Rsh$}}} {#2} \rangle}
-  
-%\newcommand{\True}{\mathbf{True}}
-%\newcommand{\False}{\mathbf{False}}
-%\newcommand{\True}{1_{\times}}
-%\newcommand{\False}{0_{+}}
-\newcommand{\True}{{\it 1}}
-\newcommand{\False}{{\it 0}}
-
-\newcommand{\trans}[1]{\overline{#1}}
-
-\newcommand{\eBot}{\Bot} % \Bot for expressions
-
-
-
-
-%
-% from asdmacro.tex
-%
-\newcommand{\etap}{\eta^{\bpos}}
-%\newcommand{\etap}{\eta'}
-\newcommand{\epsn}{\varepsilon^{\bneg}}
-%\newcommand{\epsn}{\varepsilon'}
-\newcommand{\negp}{\neg_{\bpos}}
-\newcommand{\negn}{\neg_{\bneg}}
-%\newcommand{}{}
-
-\newcommand{\Rlen}{3ex}
-
-\newcommand{\sss}{\mathbb{S}}
-\newcommand{\bbb}{\mathbb{B}}
-\newcommand{\ccc}{\mathbb{C}}
-\newcommand{\ssp}{\sss_{\bpos}}
-\newcommand{\ssn}{\sss_{\bneg}}
-\newcommand{\M}{\mathcal{M}}
-
-\newcommand{\clift}[2]{\overline{#1}#2}
-\newcommand{\cl}[1]{\clift{\pollt}{#1}}
-\newcommand{\reind}[2]{{#1}^{*}#2}
-\newcommand{\ri}[1]{\reind{\pollt}{#1}}
-\newcommand{\opclift}[2]{\underline{#1}#2}
-\newcommand{\opcl}[1]{\opclift{\pollt}{#1}}
-\newcommand{\opreind}[2]{{#1}_{!}#2}
-\newcommand{\opri}[1]{\opreind{\pollt}{#1}}
-\newcommand{\ds}{{\downarrow}}
-\newcommand{\us}{{\uparrow}}
-
-\newcommand{\lap}{\langle}
-\newcommand{\rap}{\rangle}
-\newcommand{\inj}[1]{\mathrm{in}_{#1}}
-\newcommand{\prj}[1]{\mathrm{pr}_{#1}}
-\newcommand{\diag}{\Delta}
-\newcommand{\codiag}{\nabra}
-\newcommand{\fin}{\lap\rap}
-\newcommand{\ini}{[]}
-
-\newcommand{\cp}[1]{{#1}^{\bpos}}
-\newcommand{\cn}[1]{{#1}^{\bneg}}
-\newcommand{\cpn}[1]{{#1}^{\pm}}
-
-\newcommand{\Cat}{\mathbf{Cat}}
-\newcommand{\rAdj}{\mathbf{Adj}}
-\newcommand{\LCB}{\mathbf{LCB}}
-\newcommand{\pres}[2]{{#1}_{*}{#2}}
-\newcommand{\Mod}{\mathbf{Model}}
-
-\newcommand{\xr}[1]{\xrightarrow{#1}}
-\newcommand{\xrs}[1]{\xrightarrow{\sem{#1}}}
-\newcommand{\psem}[1]{\sem{#1}^{\circ}}
-\newcommand{\model}[2]{#1 \models #2}
-\newcommand{\sig}[1]{\Sigma_{#1}}
-\newcommand{\ax}[1]{\Ax_{#1}}
-\newcommand{\ipcase}[1]{\vspace{12pt}
-\noindent\fbox{#1}}
-\newcommand{\myinfrule}[2]{\[\dfrac{#1}{#2}\]}
-
-\newcommand{\sP}[1]{\mathcal{P}_{#1}}
-\newcommand{\sN}[1]{\mathcal{N}_{#1}}
-\newcommand{\sF}[1]{\mathcal{F}_{#1}}
-\newcommand{\sG}[1]{\mathcal{G}_{#1}}
-
-\newcommand{\fnot}{\theta}
-
-\newcommand{\fc}{p} % fibred category
+\newcommand{\rcase}[3]{\mathtt{case}\,{#1}\,\mathtt{of}\,{#2}\,\Rightarrow\,{#3}}
 
 
+%% Resource calculus
+\newcommand{\flex}[1]{(\!|{#1}|\!)} % the translation from rigid terms to flexible terms
+\newcommand{\Taylor}[1]{{#1}^*}
+
+\newcommand{\Unmark}[1]{\ulcorner{#1}\urcorner}
 
 
+\newcommand{\Deriv}{\mathcal{D}}
+\newcommand{\CDev}[1]{\mathcal{C}({#1})}
 
-
-
-
+\newcommand{\isoact}[2]{{#2}[{#1}]}
 

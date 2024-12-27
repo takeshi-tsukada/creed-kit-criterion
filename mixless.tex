@@ -1,0 +1,19 @@
+\section{Towards a Criterion for MLL}
+
+A \emph{positive good element} is inductively defined as follows:
+\begin{itemize}
+    \item For \( \creed \otimes \creedb \): a pair of positive good elements
+    \item For \( \creed \llpar \creedb \): a pair of a positive good element and a negative good element
+\end{itemize}
+A \emph{negative good element} is inductively defined as follows:
+\begin{itemize}
+    \item For \( \creed \otimes \creedb \): a pair of a negative good element and a positive good element
+    \item For \( \creed \llpar \creedb \): a pair of negative good elements
+\end{itemize}
+
+A profunctor is \emph{good} if it contains a good element in its creed.
+(Equivalently, the stabiliser group of every element contains a good element.)
+
+\begin{conjecture}
+    An MLL proof structure (without unit) satisfies the strict creed-kit criterion if and only if it is a correct proof-net for MLL.
+\end{conjecture}
