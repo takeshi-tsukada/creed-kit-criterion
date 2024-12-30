@@ -134,27 +134,7 @@
 \newcommand{\kitc}{\mathcal{C}}
 
 \input{creed}
-
-
-\section{Matrix Composition and Associated Creed}
-
-\newcommand{\MatTrans}[1]{\mathcal{M}({#1})}
-\begin{theorem}
-    Let \( F \colon A \profarrow B \) and \( G \colon B \profarrow C \).
-    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
-\end{theorem}
-% \newcommand{\sem}[1]{[\![{#1}]\!]}
-\newcommand{\rsem}[1]{(\!|{#1}|\!)}
-\begin{corollary}
-    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for every sequent calculus proof \( \pi \) of LL + MIX.
-\end{corollary}
-\begin{corollary}
-    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for a correct MLL + MIX proof \( \pi \). 
-\end{corollary}
-
-
-
-
+\input{matrix}
 \input{criterion}
 \input{mixless}
 
@@ -172,6 +152,8 @@ Try to give a full completeness result.
 It suffices to find a class of profunctors that can be obtained as an interpretation of proof-structure (not necessarily correct).
 Then this condition together with the creed-kit criterion gives a characterisation of denotations of correct proof-structures.
 
+\bibliographystyle{IEEEtran}
+\bibliography{jabref}
 
 \iffalse
 \section{Introduction}

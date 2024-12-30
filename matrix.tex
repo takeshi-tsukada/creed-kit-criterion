@@ -1,0 +1,72 @@
+\section{Well-Behavedness of Matrix Composition}
+
+\newcommand{\MatTrans}[1]{\mathcal{M}({#1})}
+\newcommand{\rsem}[1]{(\!|{#1}|\!)}
+\newcommand{\SProf}{\mathbf{SProf}}
+\newcommand{\WRel}{\mathbf{WRel}}
+\newcommand{\Real}{\mathbb{R}}
+
+
+\tk{to do: explain the background, and the ``visibility'' condition in \cite{Tsukada2018}}
+
+\tk{to do: define \( \SProf_\omega \)}
+
+\tk{to do: define the matrix representation}
+
+\newcommand{\TerminalCategory}{\mathbf{1}}
+\begin{example}
+    Let \( G \) be a finite group, \( H \) be its subgroup, \( \Grp \) be a single-object groupoid with \( \Grp(a, a) = G \), and \( \eta \colon \TerminalCategory \profarrow \Grp^{\op} \times \Grp \) and \( \epsilon \colon \Grp^{\op} \times \Grp \profarrow \TerminalCategory \) be profunctors defined by \( \varphi(\star, ({-}, {+})) = \Grp({-}, {+}) \) and \( \psi(({+}, {-}), \star) = \Grp({-}, {+}) \).
+    Then \( \MatTrans{\eta}_{\star, (a,a)} = \#\Grp(a,a) = \#G \) and \( \MatTrans{\epsilon}_{(a,a), \star} = (1/\#\Grp(a,a))\#\Grp(a,a) = 1 \), so \( (\MatTrans{\epsilon} \circ \MatTrans{\eta})_{\star, \star} = \#G \).
+    The profunctor composition is given by \( (\epsilon \circ \eta)(\star, \star) = \big( \epsilon((a,a), \star) \times \eta(\star, (a,a)) \big) / {\sim} \), where \( (y, x) \sim (y', x') \) if and only if there exist \( g, h \in G \) such that \( y' = y \cdot (g,h) = g y h \) and \( x' = (g^{-1}, h^{-1}) \cdot x = h^{-1} x g^{-1} \).
+    Then \( (y, x) \sim (1_G, yx) \) by taking \( g = 1_G \) and \( h = y^{-1} \), so we can choose representatives from those of the form \( (1_G, x) \).
+    Furthermore, \( (1_G, x) \sim (1_G, x') \) if and only if there exists \( f \in G \) such that \( f^{-1} x f = x' \), i.e.~\( x \) and \( x' \) belong to the same conjugacy class.
+    Hence \( (\epsilon \circ \eta)_{\star, \star} \) consists of the set of all conjugacy classes of \( G \).
+    So \( \MatTrans{\epsilon} \circ \MatTrans{\eta} \neq \MatTrans{\epsilon \circ \eta} \), provided that \( G \) is not abelian.
+    %
+    \qed
+\end{example}
+
+\tk{confer: Joyal, definition 7, Intro-Species text}
+
+\begin{theorem}
+    % Let \( \creed \), \( \creedb \) and \( \creedc \) be groupoids with creeds.
+    Let \( F \colon \creed \profarrow \creedb \) and \( G \colon \creedb \profarrow \creedc \) be stable profunctors.
+    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \).
+\end{theorem}
+\begin{proof}
+    Let \( a \in \Grp \), \( b \in \Grpb \) and \( c \in \Grpc \) be representatives of isomorphism classes.
+    By definition, \( \MatTrans{F}_{a,b} = (1/\#\Grp(a,a)) \# F(a,b) \) and \( \MatTrans{G}_{b,c} = (1/\#\Grpb(b,b)) \#G(b,c) \).
+    So \( (\MatTrans{G} \circ \MatTrans{F})_{a,c} = (1/\#\Grp(a,a)) \sum_{b} (1/\#\Grpb(b,b)) \# G(b,c) \cdot \# F(a,b) \) (where \( b \) ranges over representatives of isomorphism classes of objects in \( \Grpb \)).
+    By definition, \( (G \circ F)(a,c) = \int^{b \in \Grpb} G(b,c) \times F(a,b) = (\coprod_{b \in \Grpb} G(b,c) \times F(a,b)) / {\sim} \), where \( (y,x) \sim (y', x') \Longleftrightarrow \exists f \colon b' \to b.\ (y', x') = (y \cdot f, f^{-1} \cdot x) \).
+    For each representative \( b \) and \( (y,x) \in G(b,c) \times F(a,b) \), the equvalence class \( \{ (y', x') \in G(b,c) \times F(a,b) \mid (x,y) \sim (x', y') \} \) consists of \( \# \Grpb(b,b) \) elements because the action \( (x,y) \mapsto (y \cdot f, f^{-1} \cdot x) \) is free by the stabilities of \( F \) and \( G \).
+    So the required equation holds.
+\end{proof}
+Note that the freeness of the action \( (y,x) \mapsto (y \cdot f, f^{-1} \cdot x) \) has been observed in \cite{Fiore2024}\tk{todo: check}
+
+\begin{corollary}
+    \( \MatTrans{{-}} \) is a functor from \( \SProf_\omega \) to \( \WRel_{\Real_+^\infty} \).
+\end{corollary}
+
+\begin{theorem}
+    Let \( F \colon A \profarrow B \) and \( G \colon B \profarrow C \).
+    If \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \), then \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}
+    Let \( F \colon A \profarrow B \) and \( G \colon B \profarrow C \).
+    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
+\end{theorem}
+
+\begin{corollary}
+    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for every sequent calculus proof \( \pi \) of LL + MIX.
+\end{corollary}
+\begin{corollary}
+    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for a correct MLL + MIX proof \( \pi \). 
+\end{corollary}
+
+
+
+
