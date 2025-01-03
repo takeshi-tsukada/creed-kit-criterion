@@ -1,9 +1,9 @@
-\section{Correctness of MLL+MIX}
+\section{Correctness for \textsf{MLL+MIX}}
 
 \tk{to do: give an interpretation of MLL proof structure.  Show the coherence by giving a direct interpretation (= \emph{experiments}) and comparing it with the standard interpretation}
 
 \begin{theorem}
-    An MLL proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for MLL + MIX.
+    An \textsf{MLL} proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for \textsf{MLL+MIX}.
 \end{theorem}
 
 
@@ -12,3 +12,11 @@
 \end{theorem}
 
 \tk{to do: creed-kit criterion for non-cut-free proof structures}
+
+\begin{corollary}
+    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for every sequent calculus proof \( \pi \) of LL + MIX.
+\end{corollary}
+\begin{corollary}
+    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for a correct MLL + MIX proof \( \pi \). 
+\end{corollary}
+

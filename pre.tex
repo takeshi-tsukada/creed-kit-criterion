@@ -1,0 +1,75 @@
+\section{Preliminaries}
+
+\subsection{Presheaves and Profunctors}
+
+
+
+\subsection{Presheaves and Profunctors as Sums of Subgroups}
+This paper considers presheaves and profunctors only on groupoids, and presheaves and profunctors on groupoids have an useful decomposition.
+Let \( \Grp \) be a groupoid, \( a \in \Grp \), and \( G \) be a subgroup of \( \Grp(a,a) \).
+We write \( \InducedProf{G} \) for the presheaf defined by:
+\begin{align*}
+    \InducedProf{G}(a')
+    &\quad\defeq\quad
+    \{ G \cdot f \mid f \in \Grp(a', a) \}
+    \\
+    \InducedProf{G}(f)
+    &\quad\defeq\quad
+    (X \mapsto X \cdot f)
+\end{align*}
+where for \( X \subseteq \Grp(a', a) \) and \( f \in \Grp(a'', a') \), \( G \cdot f \) is the subset of \( \Grp(a'', a) \) defined by \( (X \cdot f) \defeq \{ x \circ h \mid x \in X \} \).
+
+\begin{proposition}
+    The stabiliser groups of \( \InducedProf{G} \) are conjugacies of \( G \).
+    %
+    \qed
+\end{proposition}
+
+\newcommand{\Stabiliser}{\mathsf{fix}}
+
+Let \( F \) be a presheaf on \( \Grp \).
+We introduce an equivalence relation on \( \coprod_a F(a) \defeq \{ (a, x) \mid x \in F(a) \} \) by \( (a, x) \approx (a', x') \) if and only if there exists \( f \in \Grp(a', a) \) such that \( x \cdot f = x' \).
+Let \( X \) be a set of representatives of the equivalence classes of \( \approx \).
+For \( (a, x) \in X \), let \( \Stabiliser(x) \in \Subgroup(\Grp(a,a)) \) be the stabilisers of \( x \), i.e.~\( G_x \defeq \{ f \in \Grp(a,a) \mid x \cdot f = x \} \).
+
+\begin{proposition}
+    \( F \cong \coprod_{(a,x) \in X} \InducedProf{\Stabiliser(x)} \).
+\end{proposition}
+\begin{proof}
+    We give natural transformations \( \eta \colon F \Rightarrow \coprod_{(a,x) \in X} \InducedProf{G_x} \) and \( \mu \colon \coprod_{(a,x) \in X} \InducedProf{G_x} \Rightarrow F \) as follows.
+
+    Given \( y \in F(b) \), there exist \( (a,x) \in X \) and \( f \in \Grp(b,a) \) such that \( y = x \cdot f \).
+    Then we define \( \mu_b(y) \defeq G_x \cdot f \in \InducedProf{G_x} \subseteq \coprod_{(a,x) \in X} \InducedProf{G_x} \).
+    This operation is well-defined: the choice of \( (a,x) \in X \) is unique and, if \( g \in \Grp(b,a) \) also satisfies \( y = x \cdot f \), then \( x = x \cdot f \cdot g^{-1} \), so \( f \circ g^{-1} \in G_x \) and \( G_x \cdot f = G_x \cdot g \).
+    The naturality is obvious.
+
+    Given \( (a,x) \in X \) and \( X \in \InducedProf{G_x}(b) \), we have \( X = G_x \cdot f \) for some \( f \in \Grp(b,a) \).
+    Then \( \mu_b(X) \defeq x \cdot f \).
+    The well-definedness and naturality is trivial.
+
+    It is easy to see that \( \mu \circ \eta = \ident \) and \( \eta \circ \mu = \ident \).
+\end{proof}
+
+A similar argument applies to profunctors.
+Given a subgroup \( G \) of \( \Grp^\op(a,a) \times \Grp(b,b) \), we define a profunctor \( \InducedProf{G} \colon \Grp \profarrow \Grpb \) by 
+\begin{align*}
+    \InducedProf{G}(a', b')
+    &\quad\defeq\quad
+    \{ g \cdot G \cdot f \mid f \in \Grp(a', a), g \in \Grpb(b, b') \}
+    \\
+    \InducedProf{G}(f, g)
+    &\quad\defeq\quad
+    (X \mapsto (g \cdot X \cdot f)),
+\end{align*}
+where \( (g \cdot X \cdot f) \defeq \{ g \circ x \circ h \mid x \in X \} \).
+A profunctor \( F \colon \Grp \profarrow \Grpb \) between groupoids \( \Grp \) and \( \Grpb \) induced an equivalence relation on \( \coprod_a F(a,b) \defeq \{ (a, x, b) \mid x \in F(a, b) \} \) given by
+\( (a, x, b) \approx (a', x', b') \) if and only if there exists \( f \in \Grp(a', a) \) and \( g \in \Grpb(b, b') \) such that \( g \cdot x \cdot f = x' \).
+Let \( X \) be a set of representatives of the equivalence classes of \( \approx \).
+For \( (a, x) \in X \), let \( G_x \in \Subgroup(\Grp^\op(a,a) \times \Grp(b,b)) \) be the stabilisers of \( x \), i.e.~\( G_x \defeq \{ (f,g) \in \Grp^{\op}(a,a) \times \Grpb(b,b) \mid g \cdot x \cdot f = x \} \).
+
+\begin{proposition}
+    \( F \cong \coprod_{(a,x,b) \in X} \InducedProf{\Stabiliser(x)} \).
+    For \( F \colon \Grp \profarrow \Grpb \) and \( G \colon \Grpb \profarrow \Grpc \) with \( F \cong \coprod_i \InducedProf{F_i} \) and \( G \cong \coprod_j \InducedProf{G_j} \), we have \( G \circ F \cong \coprod_{i,j} (\InducedProf{G_j} \circ \InducedProf{F_i}) \).
+    %
+    \qed
+\end{proposition}

@@ -52,7 +52,12 @@ Note that the freeness of the action \( (y,x) \mapsto (y \cdot f, f^{-1} \cdot x
     If \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \), then \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
 \end{theorem}
 \begin{proof}
-    
+    Recall that \( F \cong \coprod_i \InducedProf{G_i} \) and \( G \cong \coprod_j \InducedProf{H_j} \).
+    The \( (G \circ F) \cong \coprod_{i,j} \InducedProf{H_j} \circ \InducedProf{G_i} \).
+    It is not diffucult to see that \( \MatTrans{\InducedProf{H_j}} \circ \MatTrans{\InducedProf{G_i}} \le \MatTrans{\InducedProf{H_j} \circ \InducedProf{G_i}} \) (here the order is component-wise).
+    We prove that \( \MatTrans{\InducedProf{H_j}} \circ \MatTrans{\InducedProf{G_i}} < \MatTrans{\InducedProf{H_j} \circ \InducedProf{G_i}} \) if \( G_i \) and \( H_j \) are not orthogonal.\tk{to do: explain the meaning}
+
+    \tk{to do}
 \end{proof}
 
 \begin{theorem}
@@ -60,12 +65,6 @@ Note that the freeness of the action \( (y,x) \mapsto (y \cdot f, f^{-1} \cdot x
     Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
 \end{theorem}
 
-\begin{corollary}
-    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for every sequent calculus proof \( \pi \) of LL + MIX.
-\end{corollary}
-\begin{corollary}
-    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for a correct MLL + MIX proof \( \pi \). 
-\end{corollary}
 
 
 

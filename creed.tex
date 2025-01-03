@@ -7,7 +7,7 @@ They describe ``allowed symmetries'' of presheaves and profunctors, i.e.~\( f \i
 \begin{definition}[Creed]
     A \emph{creed} of a groupoid \( \Grp \) is a collection \( (\creed(a))_{a \in \Grp} \) of subsets \( \creed(a) \subseteq \Grp(a,a) \) of endo-morphisms such that
     \begin{itemize}
-        \item \( \ident_a \in \creed(a) \),
+        \item \( \ident_a \in \creed(a) \), \tk{do we need this condition?}
         \item \( g \in \creed(a) \) implies \( g^k \in \creed(a) \) for every \( k \in \Int \), and
         \item \( g \in \creed(a) \) and \( f \in \Grp(a,b) \) implies \( f \circ g \circ f^{-1} \in \creed(b) \).
     \end{itemize}
@@ -175,4 +175,23 @@ Hence \( (g, h) \in (\creed \otimes \creedb)(a,b) \) if and only if \( \{ (g^k, 
 \tk{what is the problem when we define \( \creed \otimes \creedb := \creed \times \creedb \) and \( \creed \llpar \creedb := \{ (g,h) \mid g \in \creed \vee h \in \creedb \} \)?}
 
 \subsection{Kits}
+A kit is a correction of allowed symmetries.
+It is similar to a creed, but more fine-grained.
 
+\begin{definition}[Kit]
+    Let \( \Grp \) be a groupoid.
+    A \emph{kit} \( \kit \) is a collection \( \kit = (\kit(a))_{a \in \Grp} \) of sets of subgroups \( \kit(a) \subseteq \Subgroup(\Grp(a,a)) \) closed under conjugation: \( G \in \kit(a) \) and \( f \colon b \longrightarrow a \) in \( \Grp \), \( f^{-1} \cdot G \cdot f \in \kit(b) \).
+    %
+    \qed
+\end{definition}
+
+\begin{proposition}
+    For a kit \( \kit \), the family \( \creed'(a) := \bigcup \kit(a) \) is a creed (provided that \( \kit(a) \neq \emptyset \) for every \( a \)).
+\end{proposition}
+
+\begin{proposition}
+    For a creed \( \creed \), the family \( \kit'(a) := \{ G \in \Subgroup(\Grp(a,a)) \mid G \subseteq \creed(a) \} \) is a kit.
+\end{proposition}
+
+The translations in the above propositions form an idempotent Galois connection.
+Here the idempotency means that the passege \( (\mathit{Creed}) \mapsto (\mathit{Kit}) \mapsto (\mathit{Creed}) \) is the identity.
