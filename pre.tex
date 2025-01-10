@@ -73,3 +73,28 @@ For \( (a, x) \in X \), let \( G_x \in \Subgroup(\Grp^\op(a,a) \times \Grp(b,b))
     %
     \qed
 \end{proposition}
+
+\begin{proposition}
+    Let \( \Grp \) be an one-object groupoid, \( G \) be subgroups of \( \Grp(a,a) \) and \( H \) be a subgroup of \( \Grp^{\op}(a,a) \).
+    If \( G \cap H = \{ 1 \} \) and \( \InducedProf{H} \circ \InducedProf{G} = \ident_1 \), then \( (G, H) \) forms a strict factorisation system.
+    Conversely, a strict factorisation system satisfies the above condition.
+\end{proposition}
+\begin{proof}
+    Assume that \( \InducedProf{H} \circ \InducedProf{G} = \ident_1 \).
+    Then, for every \( g, h \in \Grp(a,a) \), we have \( (G \cdot g, h \cdot H) \sim (G, H) \).
+    In particular, \( (G \cdot g, H) \sim (G, H) \), so there exists \( k \in \Grp(a,a) \) such that \( (G \cdot g \cdot k, k^{-1} \cdot H) = (G, H) \), i.e.~\( gk \in G \) and \( k^{-1} \in H \).
+    So \( g = (gk) k^{-1} \).
+
+    This decomposition is unique.
+    Otherwise, we have \( g_1 h_1 = g_2 h_2 \) for some \( g_1, g_2 \in G \) and \( h_1, h_2 \in H \) with \( (g_1, h_1) \neq (g_2, h_2) \).
+    Assume \( h_1 \neq h_2 \).
+    Then \( g_1 (h_1 h_2^{-1}) = g_2 \in G \), so \( h_1 h_2^{-1} = g_1^{-1} g_2 \in G \).
+    So \( h_1 h_2^{-1} \in (G \cap H) \) and \( h_1 h_2^{-1} \neq 1 \), a contradiction.
+
+    Conversely, assume that \( G \) and \( H \) form a strict factorisation system.
+    Then \( G \cap H = \{ 1 \} \).
+    We show that \( (G \cdot g, h \cdot H) \sim (G, H) \) for every \( g, h \in \Grp(a,a) \).
+    We have \( (G \cdot g, h \cdot H) \sim (G \cdot g \cdot h^{-1}, H) \).
+    We can decompose \( g h^{-1} = g' h' \) with \( g' \in G \) and \( h' \in H \).
+    Then \( (G \cdot g, h \cdot H) \sim (G \cdot g \cdot h^{-1}, H) = (G \cdot g' \cdot h', H) \sim (G \cdot g', h'^{-1} \cdot H) = (G, H) \).
+\end{proof}

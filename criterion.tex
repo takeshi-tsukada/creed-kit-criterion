@@ -1,9 +1,13 @@
-\section{Correctness for \textsf{MLL+MIX}}
+\section{Correctness for \textsf{MLL+MIX} without Cut}
 
 \tk{to do: give an interpretation of MLL proof structure.  Show the coherence by giving a direct interpretation (= \emph{experiments}) and comparing it with the standard interpretation}
 
+An \emph{assignment} \( \varrho \) is a mapping from propositional variables to groupoids.
+
 \begin{theorem}
-    An \textsf{MLL} proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for \textsf{MLL+MIX}.
+    Let \( \pi \) be a cut-free proof structure for \textsf{MLL+MIX} (without unit).
+    It is correct if and only if the interpretation \( \sem{\pi}_\varrho \) in \( \mathbf{Prof} \) satisfies the kit-creed criterion for every \( \varrho \).
+    % An \textsf{MLL} proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for \textsf{MLL+MIX}.
 \end{theorem}
 
 
@@ -20,3 +24,16 @@
     \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for a correct MLL + MIX proof \( \pi \). 
 \end{corollary}
 
+
+
+\section{Correctness for \textsf{MLL+MIX} with \textsf{cut}}
+Let \( G \) be the slack orthogonality category, where \( f \orthogonal g \) if and only if \( g \circ f = \ident_I \) and this pair satisfies the jointly freeness condition.
+
+\begin{theorem}
+    Let \( \pi \) be a proof structure for \textsf{MLL+MIX} possibly with cut but without unit.
+    It is correct if and only if the interpretation \( \sem{\pi}_\varrho \) in \( \mathbf{Prof} \) is a morphism in the slack orthogonality category \( G \) for every \( \varrho \).
+    % An \textsf{MLL} proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for \textsf{MLL+MIX}.
+\end{theorem}
+\begin{proof}
+    The left-to-right direction is obvious since the slack orthogonality category is \( * \)-autonomous~\cite{Hyland2003}.\tk{to do: page}
+\end{proof}
