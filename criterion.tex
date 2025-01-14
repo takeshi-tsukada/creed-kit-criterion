@@ -6,7 +6,7 @@ An \emph{assignment} \( \varrho \) is a mapping from propositional variables to 
 
 \begin{theorem}
     Let \( \pi \) be a cut-free proof structure for \textsf{MLL+MIX} (without unit).
-    It is correct if and only if the interpretation \( \sem{\pi}_\varrho \) in \( \mathbf{Prof} \) satisfies the kit-creed criterion for every \( \varrho \).
+    It is correct if and only if the interpretation \( \sem{\pi}_\varrho \) in \( \mathbf{Prof} \) satisfies the creed-kit criterion for every \( \varrho \).
     % An \textsf{MLL} proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for \textsf{MLL+MIX}.
 \end{theorem}
 
@@ -26,14 +26,41 @@ An \emph{assignment} \( \varrho \) is a mapping from propositional variables to 
 
 
 
-\section{Correctness for \textsf{MLL+MIX} with \textsf{cut}}
-Let \( G \) be the slack orthogonality category, where \( f \orthogonal g \) if and only if \( g \circ f = \ident_I \) and this pair satisfies the jointly freeness condition.
+\section{Correctness for MLL+MIX with \textsf{cut}}
+
+
+\newcommand{\ProfCat}{\mathbf{Prof}}
+\newcommand{\CohProf}{\mathbf{CohProf}}
+\newcommand{\TotProf}{\mathbf{TotProf}}
+\begin{definition}
+    The \emph{partial orthogonality} \( \orthogonal^{\mathit{coh}} \) and \emph{total orthogonality} \( \orthogonal^{\mathit{tot}} \) on \( \ProfCat \) are defined as follows:
+    for \( F \in \ProfCat(I, \Grp) \) and \( G \in \ProfCat(\Grp, I) \),
+    \begin{align*}
+        F \orthogonal^{\mathit{coh}} G &\quad\defiff\quad F \orthogonal G \mbox{ and } G \circ F \le \ident_I \\ 
+        F \orthogonal^{\mathit{coh}} G &\quad\defiff\quad F \orthogonal G \mbox{ and } G \circ F \cong \ident_I,
+    \end{align*}
+    where for \( H \in \ProfCat(I,I) = (I^\op \times I \to \Set) \cong \Set \), we write \( H \le \ident_I \) if \( H \) is empty or singleton.
+    %
+    \qed
+\end{definition}
+
+We write \( \CohProf \) and \( \TotProf \) for the tight orthogonality categories \( T_{\orthogonal^{\mathit{coh}}}(\ProfCat) \) and \( T_{\orthogonal^{\mathit{tot}}}(\ProfCat) \).
+% be the slack orthogonality category, where \( f \orthogonal g \) if and only if \( g \circ f = \ident_I \) and this pair satisfies the jointly freeness condition.
+
+\newcommand{\Coh}{\mathbf{Coh}}
+\newcommand{\Tot}{\mathbf{Tot}}
+\begin{proposition}
+    There exists functors \( \CohProf \longrightarrow \Coh \) and \( \TotProf \longrightarrow \Tot \) that preserve the LL structures.
+    %
+    \qed
+\end{proposition}
 
 \begin{theorem}
-    Let \( \pi \) be a proof structure for \textsf{MLL+MIX} possibly with cut but without unit.
-    It is correct if and only if the interpretation \( \sem{\pi}_\varrho \) in \( \mathbf{Prof} \) is a morphism in the slack orthogonality category \( G \) for every \( \varrho \).
+    Let \( \pi \) be a proof structure for \textsf{MLL+MIX+CUT}.
+    It is correct if and only if the interpretation \( \sem{\pi}_{|\varrho|} \) in \( \ProfCat \) is coherent for every assignemnt \( \varrho \) of groupoids with coherence.
     % An \textsf{MLL} proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for \textsf{MLL+MIX}.
+    A similar statement holds for the totality.
 \end{theorem}
 \begin{proof}
-    The left-to-right direction is obvious since the slack orthogonality category is \( * \)-autonomous~\cite{Hyland2003}.\tk{to do: page}
+    The left-to-right direction is obvious since the tight orthogonality category is \( * \)-autonomous~\cite{Hyland2003}.\tk{to do: details, e.g., page and lem/prop numbers}
 \end{proof}
