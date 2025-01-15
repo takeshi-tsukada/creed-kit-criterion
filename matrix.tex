@@ -38,8 +38,8 @@ If \( F(0) = \emptyset \), the generating series of the substitution is the subs
 However, the condition \( F(0) = \emptyset \) is necessarily.
 \begin{example}
     Let \( F \) be the species defined by \( F(0) \defeq \{ a, b \} \) and \( F(n) \defeq \emptyset \) for every \( n \ge 0 \).
-    Let \( G \) be the species defined by \( G(2) \defeq 2 \), \( G(\sigma)(x) = \sigma^{-1}(x) \) for every \( x \in F(2) \) and permutation \( \sigma \colon 2 \to 2 \), and \( G(n) \defeq \emptyset \) for every \( n \neq 2 \).
-    Then \( \widehat{F}(x) = 2 \) and \( \widehat{G}(y) = y \).
+    Let \( G \) be the species defined by \( G(2) \defeq 1 \) and \( G(n) \defeq \emptyset \) for every \( n \neq 2 \).
+    Then \( \widehat{F}(x) = 2 \) and \( \widehat{G}(y) = y^2/2 \).
     So \( \widehat{G}(\widehat{F}(x)) = 2 \).
     The Kleisli lifting \( F^! \colon \mathop{!}I \profarrow \mathop{!}I \) of \( F \) is given by \( F(0,m) = \{ a, b \}^m \), \( F(0, \sigma)(x_1,\dots,x_m) = (x_{\sigma(1)}, \dots, x_{\sigma(m)}) \)\tk{inverse?} for a permutation \( \sigma \colon m \to m \) and \( (x_1,\dots,x_n) \in \{ a,b \}^m \), and \( F(n,m) = \emptyset \) for every \( n > 0 \).
     Then \( (G \circ_! F)(0) = \int^{m \in \mathop{!}I} G(m) \times F^!(0, m) = \{ a, b \}^2/{\sim} \) where \( (x_1,x_2) \sim (y_1,y_2) \) if \( (x_1,x_2) = (y_1,y_2) \) or \( (x_1,x_2) = (y_2,y_1) \).
