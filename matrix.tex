@@ -13,6 +13,41 @@
 
 \tk{to do: define the matrix representation}
 
+\newcommand{\FinSet}{\mathbf{FinSet}}
+
+Recall that a species (in the sense of Joyal~\cite{Joyal1983?}) is a functor \( \FinSet \longrightarrow \FinSet \).
+The \emph{(exponential) generating series} \( \widehat{F} \) of a species \( F \colon \FinSet \longrightarrow \FinSet \) is a formal power series defined by
+\begin{equation*}
+    \widehat{F}(x)
+    \quad\defeq\quad
+    \sum_{n = 0}^{\infty} \dfrac{\# F(n)}{n!} x^n,
+\end{equation*}
+where \( n \) represents a set of \( n \) elements and \( \# X \) is the cardinality of \( X \).
+The generating series \( \widehat{F} \) is easier to handle and has much information of the original species \( F \).
+Many operations on species have the corresponding operations on generating series.
+
+A species \( F \) induces a profunctor \( \FinSet \profarrow I \), which we write as \( F \).
+Note that \( \FinSet \cong \mathop{!}I \).
+The Klisli composition \( G \circ_! F \) of \( F, G \colon \mathop{!}I \profarrow I \) is called the \emph{substitution} of species~\cite{FioreSpecies}.
+If \( F(0) = \emptyset \), the generating series of the substitution is the substitution of generating series~\cite[Lem???]{Joyal?}:
+\begin{equation*}
+    (\widehat{G \circ_! F})(x)
+    \quad=\quad
+    \widehat{G}(\widehat{F}(x)).
+\end{equation*}
+However, the condition \( F(0) = \emptyset \) is necessarily.
+\begin{example}
+    Let \( F \) be the species defined by \( F(0) \defeq \{ a, b \} \) and \( F(n) \defeq \emptyset \) for every \( n \ge 0 \).
+    Let \( G \) be the species defined by \( G(2) \defeq 2 \), \( G(\sigma)(x) = \sigma^{-1}(x) \) for every \( x \in F(2) \) and permutation \( \sigma \colon 2 \to 2 \), and \( G(n) \defeq \emptyset \) for every \( n \neq 2 \).
+    Then \( \widehat{F}(x) = 2 \) and \( \widehat{G}(y) = y \).
+    So \( \widehat{G}(\widehat{F}(x)) = 2 \).
+    The Kleisli lifting \( F^! \colon \mathop{!}I \profarrow \mathop{!}I \) of \( F \) is given by \( F(0,m) = \{ a, b \}^m \), \( F(0, \sigma)(x_1,\dots,x_m) = (x_{\sigma(1)}, \dots, x_{\sigma(m)}) \)\tk{inverse?} for a permutation \( \sigma \colon m \to m \) and \( (x_1,\dots,x_n) \in \{ a,b \}^m \), and \( F(n,m) = \emptyset \) for every \( n > 0 \).
+    Then \( (G \circ_! F)(0) = \int^{m \in \mathop{!}I} G(m) \times F^!(0, m) = \{ a, b \}^2/{\sim} \) where \( (x_1,x_2) \sim (y_1,y_2) \) if \( (x_1,x_2) = (y_1,y_2) \) or \( (x_1,x_2) = (y_2,y_1) \).
+    So \( (\widehat{G \circ_! F})(x) = 3 \).
+    %
+    \qed
+\end{example}
+
 \newcommand{\TerminalCategory}{\mathbf{1}}
 \begin{example}
     Let \( G \) be a finite group, \( H \) be its subgroup, \( \Grp \) be a single-object groupoid with \( \Grp(a, a) = G \), and \( \eta \colon \TerminalCategory \profarrow \Grp^{\op} \times \Grp \) and \( \epsilon \colon \Grp^{\op} \times \Grp \profarrow \TerminalCategory \) be profunctors defined by \( \varphi(\star, ({-}, {+})) = \Grp({-}, {+}) \) and \( \psi(({+}, {-}), \star) = \Grp({-}, {+}) \).
