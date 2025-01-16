@@ -110,9 +110,12 @@
 \maketitle
 
 \begin{abstract}
-    The (bi)category of profunctors can be seen as a categorification of the relational model of linear logic.
-    The profunctor interpretation of a \( \lambda \)-term concides with the Taylor expansion in the profunctor model 
-    This paper studies the action of symmetries in the profunctor interpretation of correct and incorrect nets of linear logic.
+    The (bi)category of profunctors on groupoids is a categorification of the relational model of linear logic.
+    Its objects are not mere sets but sets whose elements come equipeed with groups representing their symmetries, and its morphisms carry actions of the symmetries.
+    The profunctor interpretations of \( \lambda \)-terms are known to have a certian property on their symmetry actions, the property which makes the matrix representation of profunctors functorial.
+    The symmetry actions of the interpretations have also been studied in terms of ceeeds and kits.
+    This paper addresses the converse question: how precisely the functoriality of the matrix representations, creeds or kits does characterise the interpretations.
+    We show that these notions are sufficient to distinguish between correct proof-nets from incorrect proof structures for multiplicative linear logic, so these notions provide new correctness criteria.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -137,7 +140,7 @@
 \newcommand{\InducedProf}[1]{\hat{#1}}
 \newcommand{\Subgroup}{\mathit{Subgroup}}
 
-
+\input{intro}
 \input{pre}
 \input{creed}
 \input{matrix}
