@@ -1,0 +1,26 @@
+\section{Correctness for \textsf{MLL+MIX} without Cut}
+
+\tk{to do: give an interpretation of MLL proof structure.  Show the coherence by giving a direct interpretation (= \emph{experiments}) and comparing it with the standard interpretation}
+
+An \emph{assignment} \( \varrho \) is a mapping from propositional variables to groupoids.
+
+\begin{theorem}
+    Let \( \pi \) be a cut-free proof structure for \textsf{MLL+MIX} (without unit).
+    It is correct if and only if the interpretation \( \sem{\pi}_\varrho \) in \( \mathbf{Prof} \) satisfies the creed-kit criterion for every \( \varrho \).
+    % An \textsf{MLL} proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for \textsf{MLL+MIX}.
+\end{theorem}
+
+
+\begin{theorem}
+    An MLL proof structure (without unit) \( \pi \) is a correct proofnet for MLL + MIX if and only if, for every substitution \( \vartheta \) of propositional variables in \( \pi \) and every correct proof-net \( \pi' \), \( \rsem{\mathsf{cut}(\pi\vartheta, \pi')} = \MatTrans{\sem{\mathsf{cut}(\pi\vartheta, \pi')}} \). 
+\end{theorem}
+
+\tk{to do: creed-kit criterion for non-cut-free proof structures}
+
+\begin{corollary}
+    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for every sequent calculus proof \( \pi \) of LL + MIX.
+\end{corollary}
+\begin{corollary}
+    \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for a correct MLL + MIX proof \( \pi \). 
+\end{corollary}
+
