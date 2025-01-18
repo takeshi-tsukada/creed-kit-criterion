@@ -1,11 +1,22 @@
 \section{Functoriality of Matrix Representation}
-This section shows the connection between the functoriality of the matrix representation of profunctors and creeds/kits.
+The profunctor interpretations of \( \lambda \)-terms and proof nets exhibit a special form of symmetry action, and we have seen that this property can be expressed through the notions of creed~\cite{Taylor1989} and kit~\cite{Fiore2024}.
+Taylor's creed is inspiced by stable domain theory, and kit by Fiore et~al.{} is motivated by the exploration of a cartesian closed category involving polynomial functors.
+Both concepts arise primarily from theoretical interests.
+
+The symmetry action in the profunctor interpretation of lambda terms is also known to exhibit another property: the functoriality of matrix representations. Matrix representations generalise generating series in combinatorics and are motivated by practical considerations, namely simplification of calculations.
+
+This section connects these studies on the symmetry in the interpretation of \( \lambda \)-terms.
+Specifically, we demonstrate that the functoriality of matrix representations can be completely characterised by creed and kit.
+As a consequence, we obtain a functor from the category of stable profunctors to the category of matrices.
+
+Our discussion is based on creeds, but it is easy to describe the results using (Boolean) kits.
+
+% This section shows the connection between the functoriality of the matrix representation and creeds/kits.
 
 \newcommand{\MatTrans}[1]{\mathcal{M}({#1})}
 \newcommand{\rsem}[1]{(\!|{#1}|\!)}
 \newcommand{\SProf}{\mathbf{SProf}}
 \newcommand{\WRel}{\mathbf{WRel}}
-\newcommand{\Real}{\mathbb{R}}
 
 
 \tk{to do: explain the background, and the ``visibility'' condition in \cite{Tsukada2018}}
@@ -14,6 +25,8 @@ This section shows the connection between the functoriality of the matrix repres
 
 \tk{to do: define the matrix representation}
 
+
+\subsection{Generating Series and Matrix Representation}
 \newcommand{\FinSet}{\mathbf{FinSet}}
 
 Recall that a species (in the sense of Joyal~\cite{Joyal1983?}) is a functor \( \FinSet \longrightarrow \FinSet \).
@@ -52,12 +65,13 @@ However, the condition \( F(0) = \emptyset \) is necessarily.
 
 
 For simplicity, we assume \( \Grp \), \( \Grpb \) and \( \Grpc \) are skeletal.
+The matrix representation \( \MatTrans{F} \) of a profunctor \( F \colon \Grp \profarrow \Grpb \) is given by:\tk{citation?}
 \begin{equation*}
     \MatTrans{F}_{a,b}
     \quad\defeq\quad
     \dfrac{\# F(a,b)}{\# \Grp(a,a)}.
 \end{equation*}
-The set \( F(a,b) \) can be infinite, so \( \MatTrans{F}_{a,b} \in [0, \infty] \).\tk{to do: notation}
+The set \( F(a,b) \) can be infinite, so \( \MatTrans{F}_{a,b} \in [0, \infty] \).
 \begin{remark}
     A species \( F \colon \FinSet \longrightarrow \FinSet \) can be seen as a profunctor \( F \colon {!}I \profarrow I \).
     The generating series \( \widehat{F}(x) \) can be written in terms of the matrix representation as \( \widehat{F}(x) = \sum_{n = 0}^{\infty} \MatTrans{F}_{n, \star}\, x^n \), where \( n = \langle \overbrace{\star, \dots, \star}^n \rangle \in {!}I \) and \( \star \) is the unique object of \( I \).
@@ -86,60 +100,129 @@ However, this operation is not functorial.
     \qed
 \end{example}
 
-\begin{theorem}
-    Let \( F \colon \Grp \profarrow \Grpb \) and \( G \colon \Grpb \profarrow \Grpc \).
-    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in \Grp \) and \( c \in \Grpc \).
+However, previous work~\cite{Tsukada2018,Clairambault} showed that \( \mathcal{M} \) is functorial on profunctors definable by \( \lambda \)-terms.
+\begin{theorem}[{\cite{Tsukada2018}, \cite{Clairambault}}]
+    Assume simply-typed \( \lambda \)-terms \( x \colon \tau \vdash t \colon \tau' \) and \( y \colon \tau' \vdash t' \colon \tau'' \).
+    Then \( \MatTrans{\sem{t'}_{\ProfCat} \circ \sem{t}_{\ProfCat}} = \MatTrans{\sem{t'}_{\ProfCat}} \circ \MatTrans{\sem{t}_{\ProfCat}} \).
     %
     \qed
 \end{theorem}
 
+\begin{remark}
+    The matrix representation is functorial on denotations of \( \lambda \)-terms.
+    Therefore, at least one of \( F \) or \( G \) in \cref{eg:matrix:species-counterexample} is not \( \lambda \)-definable.
+    Actually, both are not definable by pure \( \lambda \)-terms, but more problematic one is \( G \).
+    Recall that \( G \colon {!}I \profarrow I \) and \( G(2) = 1 \), so the swapping \( \sigma(i) = (1-i) \) on \( 2 = \{ 0,1 \} \) fixes the unique element of \( G(2) \).
+    However, in the denotation of a \( \lambda \)-term \( x \colon {!}\mathtt{unit} \vdash t \colon \mathtt{unit} \), all symmetries of \( {!}\mathtt{unit} \) except for the identities act freely.
+    This freeness is the key to the well-behavedness of the matrix representation in the Kleisli composition of profunctors of type \( {!}I \profarrow I \).
+    %
+    \qed
+\end{remark}
+
+
+\subsection{Creed/Kit and Matrix Representation}
+To understand the relationship between matrix representations and creed/kit, it is helpful to consider why the product of matrix representations and the matrix representation of the composition of profunctors differ. Both the product of matrix representations and the matrix representation of profunctor composition involve dividing a sum of products, but the difference lies in the nature of the division: the product of matrix representations divides by the number of elements in 
+\( \Grpb(b,b) \), while the composition of profunctors uses equivalence classes under the action of \( \Grpb(b,b) \).
+
+Intuitively, these two operations coincide when the equivalence classes under the action of \( \Grpb(b,b) \) consist of exactly \( \#\Grpb(b,b) \) elements---in other words, when the \( \Grpb(b,b) \) action to \( G(b,c) \times F(a,b) \) is free.
+As Fiore et~al.~\cite{Fiore2024} have noted, creed and kit precisely capture the freeness of such actions.
+
+Note that the freeness of the action \( (y,x) \mapsto (y \cdot f, f^{-1} \cdot x) \) is the definition of the orthogonality in \cite[Definition~7.8]{Fiore2024}.
+Here the action is free if \( f \mapsto (y \cdot f, f^{-1} \cdot x) \) is injective for every \( (y,x) \).
+
+\begin{lemma}\label{lem:matrix:composition-of-signle-orbit}
+    Let \( \Grp \), \( \Grpb \) and \( \Grpc \) be groupoids and \( K \subgroup \Grp^{\op}(a,a) \times \Grpb(b,b) \) and \( H \subgroup \Grpb^{\op}(b,b) \times \Grpc(c,c) \).
+    \begin{itemize}
+        \item \( \MatTrans{\InducedProf{K}} \circ \MatTrans{\InducedProf{H}} \le \MatTrans{\InducedProf{K} \circ \InducedProf{H}} \).
+        \item
+            % \( \MatTrans{\InducedProf{K}} \circ \MatTrans{\InducedProf{H}} = \MatTrans{\InducedProf{K} \circ \InducedProf{H}} \)
+            The equality holds if and only if \( {}_{\ident_a}H \cap K_{\ident_c} = \{ \ident \} \).
+    \end{itemize}
+\end{lemma}
+\begin{proof}
+    For simplicity, we assume \( \Grp \), \( \Grpb \) and \( \Grpc \) are skeletal.
+    For \( a' \in \Grp \) and \( c' \in \Grpc \) with \( a \neq a' \) or \( c \neq c' \), obviously \( (\MatTrans{\InducedProf{K}} \circ \MatTrans{\InducedProf{H}})_{a',c'} = \MatTrans{\InducedProf{K} \circ \InducedProf{H}}_{a',c'} = 0 \).
+    We calculate \( (\MatTrans{\InducedProf{K}} \circ \MatTrans{\InducedProf{H}})_{a,c} \) and \( \MatTrans{\InducedProf{K} \circ \InducedProf{H}}_{a,c} \).
+
+    Since \( \InducedProf{K} \) is the collection of cosets of \( K \), we have \( \#\InducedProf{K}(a,b) = \#(\Grp^{\op}(a,a) \times \Grpb(b,b))/\#K \).
+    So \( \MatTrans{\InducedProf{K}}_{a,b} = \#(\Grp^{\op}(a,a) \times \Grpb(b,b))/(\#K \#\Grp^{\op}(a,a)) = \#\Grpb(b,b)/\#K \).
+    Therefore \( (\MatTrans{\InducedProf{H}} \circ \MatTrans{\InducedProf{K}}) = \#\Grpb(b,b)\,\#\Grpc(c,c)/(\#K \#H) \).
+
+    Recall that \( (\InducedProf{K} \circ \InducedProf{H})(a,c) = (\InducedProf{K}(b, c) \times \InducedProf{H}(a,b))/{\sim} \), where \( (x, y) \sim (x', y') \) if and only if \( (x \cdot f, f^{-1} \cdot y) = (x', y') \) for some \( f \in \Grpb(b,b) \).
+    We show that each \( \sim \)-equivalence class consists of \( \#\Grpb(b,b) \) elements.
+    Let \( x \in \InducedProf{H}(a,b) \) and \( y \in \InducedProf{K}(b,c) \).
+    Since \( [(x,y)]_{\sim} = \{ (x \cdot f, f^{-1} \cdot y) \mid f \in \Grpb(b,b) \} \), the equivalence class has at most \( \# \Grpb(b,b) \) elements.
+    Therefore \( \#(\InducedProf{K} \circ \InducedProf{H})(a,c) \ge \#\InducedProf{K}(a,b) \,\#\InducedProf{H}(b,c) / \#\Grpb(b,b) = \#(\Grp^{\op}(a,a) \times \Grpb(b,b))/\#K \times \#(\Grpb^{\op}(b,b) \times \Grpc(c,c))/\#H \times 1/\#\Grpb(b,b) \).
+    So \( \MatTrans{\InducedProf{K} \circ \InducedProf{H}}_{a,c} = \#(\InducedProf{K} \circ \InducedProf{H})(a,c)/\#\Grp(a,a) \ge \#\Grpb(b,b) \# \Grpc(c,c) / \#H \#K \).
+
+    If the orthogonality condition holds, then the action is free.
+    So \( \#(\InducedProf{K} \circ \InducedProf{H})(a,c) \ge \#\InducedProf{K}(a,b) \,\#\InducedProf{H}(b,c) / \#\Grpb(b,b) \), and hence the equality holds.
+
+    \ifdraft
+    \tk{Move to an appropriate place}
+    Assume that \( [(x,y)]_{\sim} \) has less than \( \# \Grpb(b,b) \) elements.
+    Then \( (x \cdot f_1, f_1^{-1} \cdot y) = (x \cdot f_2, f_2^{-1} \cdot y) \) for some \( f_1, f_2 \in \Grpb(b,b) \) with \( f_1 \neq f_2 \).
+    We can assume without loss of generality that \( f_1 = \ident \); otherwise, replace \( (x,y) \) with \( (x \cdot f_1, f_1^{-1} \cdot y) \) and \( f_2 \) with \( f_1^{-1} f_2 \).
+    By the definition of \( \InducedProf{H} \) and \( \InducedProf{K} \), we have \( x = f \cdot K \cdot g \) and \( y = g' \cdot H \cdot h \).
+    Then \( x = x \cdot f_2 \) means \( f \cdot K \cdot g = f \cdot K \cdot g \cdot f_2 \), which implies \( f \cdot (\ident, \ident) \cdot g = (f,g) \in f \cdot K \cdot g \cdot f_2 \), i.e.~\( (f,g) = f \cdot (u,v) \cdot g \cdot f_2 \) for some \( (u,v) \in K \).
+    Hence \( (u,v) = (\ident, g \circ f_2^{-1} \circ g^{-1}) \in K \).
+    Similarly, \( y = f_2^{-1} \cdot y \) implies \( (g' \circ f_2 \circ g', \ident) \in H \).
+    So \( g \circ f_2^{-1} \circ g^{-1} = \ident \) and \( g' \circ f_2 \circ g' = \ident \).
+    So \( f_2^{-1} = \ident \), a contradiction.
+    \fi
+
+    Conversely, assume that the orthogonality does not hold.
+    Then \( (K, H) = (K \cdot f, f^{-1} \cdot H) \) for some \( f \neq \ident \).
+    In this case, the equivalence class \( [(K,H)]_{\sim} \) consists of at most \( \#\Grpb(b,b)/2 \) elements.
+    So \( \#(\InducedProf{K} \circ \InducedProf{H})(a,c) > \#\InducedProf{K}(a,b) \,\#\InducedProf{H}(b,c) / \#\Grpb(b,b) \).
+\end{proof}
 
 \begin{theorem}
-    % Let \( \creed \), \( \creedb \) and \( \creedc \) be groupoids with creeds.
-    Let \( F \colon \creed \profarrow \creedb \) and \( G \colon \creedb \profarrow \creedc \) be stable profunctors.
+    Let \( F \colon \Grp \profarrow \Grpb \) and \( G \colon \Grpb \profarrow \Grpc \).
+    \begin{itemize}
+        \item If \( \CreedOf(F(a, {-})) \orthogonal \CreedOf(G({-}, c)) \) for every \( a \in \Grp \) and \( c \in \Grpc \), then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \).
+        \item If \( \MatTrans{G \circ F} \) is finitely,\tk{to do: define} the converse also holds. 
+    \end{itemize}
+    % Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \CreedOf(F(a, {-})) \orthogonal \CreedOf(G({-}, c)) \) for every \( a \in \Grp \) and \( c \in \Grpc \).
+\end{theorem}
+\begin{proof}
+    For simplicity, we assume that \( \Grp \), \( \Grpb \) and \( \Grpc \) are skeletal.
+    By \cref{lem:prof-decomposition}, pronfuctors \( F \) and \( G \) can be described as \( F \cong \coprod_{i \in I} \InducedProf{H_i} \) and \( G \cong \coprod_{j \in J} \InducedProf{K_j} \) where \( H_i \) is a subgroup of \( \Grp^{\op}(a_i, a_i) \times \Grpb(b_i, b_i) \) and \( K_j \) is a subgroup of \( \Grpb^{\op}(b_j, b_j) \times \Grpc(c_j, c_j) \).
+    Note that \( G \circ F \cong \coprod_{i,j} \InducedProf{K_j} \circ \InducedProf{H_i} \) and \( \MatTrans{G \circ F} = \sum_{i,j} \MatTrans{\InducedProf{K_j} \circ \InducedProf{H_i}} \).
+
+    By \cref{lem:matrix:composition-of-signle-orbit}, we have \( \MatTrans{G} \circ \MatTrans{F} = \sum_{i,j} \MatTrans{\InducedProf{K_j}} \circ \MatTrans{\InducedProf{H_i}} \le \sum_{i,j} \sum_{i,j} \MatTrans{\InducedProf{K_j} \circ \InducedProf{H_i}} = \MatTrans{G \circ F} \).
+
+    If the creed orthogonality condition holds, then the same condition holds for every pair \( (\InducedProf{K_j}, \InducedProf{H_i}) \), so by \cref{lem:matrix:composition-of-signle-orbit}, the equality holds.
+
+    If the creed orthogonality fails, then the orthogonality fails for \( (\InducedProf{K_{j_0}}, \InducedProf{H_{i_0}}) \) for some \( (j_0,i_0) \).
+    By \cref{lem:matrix:composition-of-signle-orbit}, \( \MatTrans{\InducedProf{K_{j_0}}} \circ \MatTrans{\InducedProf{H_{i_0}}} < \MatTrans{\InducedProf{K_{j_0}} \circ \InducedProf{H_{i_0}}} \).
+    Since \( \MatTrans{\InducedProf{K_{j}}} \circ \MatTrans{\InducedProf{H_{i}}} \le \MatTrans{\InducedProf{K_{j}} \circ \InducedProf{H_{i}}} \) for every \( i \) and \( j \), we have \( \sum_{i,j} \MatTrans{\InducedProf{K_j}} \circ \MatTrans{\InducedProf{H_i}} < \sum_{i,j} \sum_{i,j} \MatTrans{\InducedProf{K_j} \circ \InducedProf{H_i}} \) by the finiteness of \( i \) and \( j \).
+\end{proof}
+
+\begin{corollary}
+    Let \( \creed \), \( \creedb \) and \( \creedc \) be groupoids with creeds and \( F \colon \creed \profarrow \creedb \) and \( G \colon \creedb \profarrow \creedc \) be stable profunctors.
     Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \).
-\end{theorem}
-\begin{proof}
-    Let \( a \in \Grp \), \( b \in \Grpb \) and \( c \in \Grpc \) be representatives of isomorphism classes.
-    By definition, \( \MatTrans{F}_{a,b} = (1/\#\Grp(a,a)) \# F(a,b) \) and \( \MatTrans{G}_{b,c} = (1/\#\Grpb(b,b)) \#G(b,c) \).
-    So \( (\MatTrans{G} \circ \MatTrans{F})_{a,c} = (1/\#\Grp(a,a)) \sum_{b} (1/\#\Grpb(b,b)) \# G(b,c) \cdot \# F(a,b) \) (where \( b \) ranges over representatives of isomorphism classes of objects in \( \Grpb \)).
-    By definition, \( (G \circ F)(a,c) = \int^{b \in \Grpb} G(b,c) \times F(a,b) = (\coprod_{b \in \Grpb} G(b,c) \times F(a,b)) / {\sim} \), where \( (y,x) \sim (y', x') \Longleftrightarrow \exists f \colon b' \to b.\ (y', x') = (y \cdot f, f^{-1} \cdot x) \).
-    For each representative \( b \) and \( (y,x) \in G(b,c) \times F(a,b) \), the equvalence class \( \{ (y', x') \in G(b,c) \times F(a,b) \mid (x,y) \sim (x', y') \} \) consists of \( \# \Grpb(b,b) \) elements because the action \( (x,y) \mapsto (y \cdot f, f^{-1} \cdot x) \) is free by the stabilities of \( F \) and \( G \).
-    So the required equation holds.
-\end{proof}
-Note that the freeness of the action \( (y,x) \mapsto (y \cdot f, f^{-1} \cdot x) \) has been observed in \cite{Fiore2024}\tk{todo: check}
-
-\begin{corollary}
-    \( \MatTrans{{-}} \) is a functor from \( \SProf_\omega \) to \( \WRel_{\Real_+^\infty} \).
-\end{corollary}
-
-\begin{theorem}
-    Let \( F \colon A \profarrow B \) and \( G \colon B \profarrow C \).
-    If \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \), then \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
-\end{theorem}
-\begin{proof}
-    Recall that \( F \cong \coprod_i \InducedProf{G_i} \) and \( G \cong \coprod_j \InducedProf{H_j} \).
-    The \( (G \circ F) \cong \coprod_{i,j} \InducedProf{H_j} \circ \InducedProf{G_i} \).
-    It is not diffucult to see that \( \MatTrans{\InducedProf{H_j}} \circ \MatTrans{\InducedProf{G_i}} \le \MatTrans{\InducedProf{H_j} \circ \InducedProf{G_i}} \) (here the order is component-wise).
-    We prove that \( \MatTrans{\InducedProf{H_j}} \circ \MatTrans{\InducedProf{G_i}} < \MatTrans{\InducedProf{H_j} \circ \InducedProf{G_i}} \) if \( G_i \) and \( H_j \) are not orthogonal.\tk{to do: explain the meaning}
-
-    \tk{to do}
-\end{proof}
-
-\begin{theorem}
-    Let \( F \colon \Grp \profarrow \Grpb \) and \( G \colon \Grpb \profarrow \Grpc \).
-    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in \Grp \) and \( c \in \Grpc \).
     %
     \qed
-\end{theorem}
+\end{corollary}
+% \begin{proof}
+%     Let \( a \in \Grp \), \( b \in \Grpb \) and \( c \in \Grpc \) be representatives of isomorphism classes.
+%     By definition, \( \MatTrans{F}_{a,b} = (1/\#\Grp(a,a)) \# F(a,b) \) and \( \MatTrans{G}_{b,c} = (1/\#\Grpb(b,b)) \#G(b,c) \).
+%     So \( (\MatTrans{G} \circ \MatTrans{F})_{a,c} = (1/\#\Grp(a,a)) \sum_{b} (1/\#\Grpb(b,b)) \# G(b,c) \cdot \# F(a,b) \) (where \( b \) ranges over representatives of isomorphism classes of objects in \( \Grpb \)).
+%     By definition, \( (G \circ F)(a,c) = \int^{b \in \Grpb} G(b,c) \times F(a,b) = (\coprod_{b \in \Grpb} G(b,c) \times F(a,b)) / {\sim} \), where \( (y,x) \sim (y', x') \Longleftrightarrow \exists f \colon b' \to b.\ (y', x') = (y \cdot f, f^{-1} \cdot x) \).
+%     For each representative \( b \) and \( (y,x) \in G(b,c) \times F(a,b) \), the equvalence class \( \{ (y', x') \in G(b,c) \times F(a,b) \mid (x,y) \sim (x', y') \} \) consists of \( \# \Grpb(b,b) \) elements because the action \( (x,y) \mapsto (y \cdot f, f^{-1} \cdot x) \) is free by the stabilities of \( F \) and \( G \).
+%     So the required equation holds.
+% \end{proof}
 
-\newcommand{\StableProf}{\mathbf{StableProf}}
-\begin{corollary}
-    \( \MatTrans{{-}} \) is a functor from \( \StableProf \) to \( \WRel_{[0,\infty]} \).
+\tk{to do: define \( \SProf_{\omega} \)}
+\begin{theorem}
+    \( \mathcal{M} \) is a functor from \( \SProf_{\omega} \) to \( \WRel_{[0,\infty]} \).
     It preserves all LL structures.
     %
     \qed
-\end{corollary}
+\end{theorem}
 
 This result can be straightforwardly extended to the weighted setting in \cite{Tsukada2018}.
+
+
 

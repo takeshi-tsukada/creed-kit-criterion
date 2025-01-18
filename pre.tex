@@ -1,5 +1,14 @@
 \section{Preliminaries}
 
+We write \( I \) for the trivial category, which has one object \( \star \) and one morphism \( \ident_\star \).
+We write \( [0, \infty] \) for the set \( \{ r \in \Real \mid r \ge 0 \} \cup \{ \infty \} \).
+The sum \( \sum_{i \in I} r_i \) of possibly infinite family \( (r_i)_{i \in I} \) of elements in \( [0,\infty] \) makes sense: it is the least upper bound of \( \{ \sum_{i \in J} r_i \mid J \subseteq I, J \colon \mbox{finite} \} \) (where \( \infty + r = \infty \)). 
+
+\newcommand{\subgroup}{\le}
+\( G \subgroup H \) means that \( G \) is a subgroup of \( H \).
+
+\tk{to do: introduce the weighted relational model, and introduce some necessarily notions and notations, such as \( \le \) on matrices.}
+
 \subsection{Presheaves and Profunctors}
 
 \newcommand{\Object}{\mathit{obj}}
@@ -51,7 +60,7 @@ We introduce an equivalence relation \( \sim \) on \( \coprod_a F(a) \defeq \{ (
 Let \( \mathcal{R} \) be a set of representatives of the equivalence classes of \( \sim \).
 For \( (a, x) \in \mathcal{R} \), let \( \Stabiliser(x) \in \Subgroup(\Grp(a,a)) \) be the stabilisers of \( x \), i.e.~\( \Stabiliser(x) \defeq \{ f \in \Grp(a,a) \mid x \cdot f = x \} \).
 
-\begin{proposition}
+\begin{proposition}[{\cite[Lemma~7.5]{Fiore2024}}]
     \( F \cong \coprod_{(a,x) \in \mathcal{R}} \InducedProf{\Stabiliser(x)} \).
 \end{proposition}
 \begin{proof}
@@ -89,11 +98,11 @@ A profunctor \( F \colon \Grp \profarrow \Grpb \) induces an equivalence relatio
 Let \( \mathcal{R} \) be a set of representatives of the equivalence classes of \( \sim \).
 For \( (a, x) \in X \), let \( \Stabiliser(x) \in \Subgroup(\Grp^\op(a,a) \times \Grpb(b,b)) \) be the stabilisers of \( x \), i.e.~\( \Stabiliser(x) \defeq \{ (f,g) \in \Grp^{\op}(a,a) \times \Grpb(b,b) \mid g \cdot x \cdot f = x \} \).
 
-\begin{proposition}
+\begin{lemma}\label{lem:prof-decomposition}
     \( F \cong \coprod_{(a,x,b) \in \mathcal{R}} \InducedProf{\Stabiliser(x)} \).
     For \( F \colon \Grp \profarrow \Grpb \) and \( G \colon \Grpb \profarrow \Grpc \) with \( F \cong \coprod_i \InducedProf{F_i} \) and \( G \cong \coprod_j \InducedProf{G_j} \), we have \( G \circ F \cong \coprod_{i,j} (\InducedProf{G_j} \circ \InducedProf{F_i}) \).
     %
     \qed
-\end{proposition}
+\end{lemma}
 
 
