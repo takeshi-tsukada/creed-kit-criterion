@@ -1,21 +1,157 @@
-\section{Correctness for \textsf{MLL+MIX} without Cut}
+\section{Correctness for $\mathsf{MLL+Mix}$ without Cut}
+In this section, we approach the classical problem of linear logic---namely, the correctness of proof structures---from the perspective of creed and kit, providing a new viewpoint on the relevance of these concepts.
 
-\tk{to do: give an interpretation of MLL proof structure.  Show the coherence by giving a direct interpretation (= \emph{experiments}) and comparing it with the standard interpretation}
 
-An \emph{assignment} \( \varrho \) is a mapping from propositional variables to groupoids.
+\subsection{Preliminaries: MLL proof structures and proof-nets}
+
+\newcommand{\PropVar}{\alpha}
+\newcommand{\PropVarb}{\beta}
+\newcommand{\PropVarc}{\gamma}
+
+A \emph{formula} is given by the following grammar:
+\begin{equation*}
+    A,B,C
+    \quad::=\quad
+    \PropVar \mid \PropVar^{\bot} \mid A \otimes B \mid A \llpar B,
+\end{equation*}
+where \( \PropVar \) is a propositional variable and \( \PropVar^{\bot} \) is its negation.
+A \emph{literal} is a propositional \( \PropVar \) or its negation \( \PropVar^{\bot} \).
+For simplicity, we consider only formulas in negation normal form (i.e.~the negation \( ({-})^{\bot} \) is applicable to only propositional variables).
+The operation \( ({-})^{\bot} \) on formulas is defined as usual.
+The tensor unit is abscent as in many other papers on this subject.\tk{cite?}
+
+A \emph{squent} \( \Gamma \) is a finite sequence of formulas.
+The concatenation of sequents \( \Gamma \) and \( \Delta \) is written as \( \Gamma, \Delta \).
+The (one-sided) sequent calculus \( \mathsf{MLL} \) is defined by the rules in \cref{fig:sequent-calculus-mll}.
+The sequent calculus \( \mathsf{MLL+Mix} \) is defined by the rules in \cref{fig:sequent-calculus-mll} with the \( \mathsf{Mix} \) rule in \cref{fig:mix-rule}.
+\begin{figure}[t]
+    \begin{gather*}
+        \dfrac{\mathstrut}{\vdash A, A^\bot}(\mathsf{Ax})
+        \quad
+        \dfrac{\vdash \Gamma, A \qquad \vdash \Delta, B}{\vdash \Gamma, \Delta, A \otimes B}(\otimes)
+        \quad
+        \dfrac{\vdash \Gamma, A, B}{\vdash \Gamma, A \llpar B}(\llpar)
+        \\[5pt]
+        \dfrac{\vdash \Gamma, A, B, \Delta}{\vdash \Gamma, B, A, \Delta}(\mathsf{Ex})
+        \quad
+        \dfrac{\vdash \Gamma, A \qquad \vdash \Delta, A^\bot}{\vdash \Gamma, \Delta}(\mathsf{Cut}).
+    \end{gather*}
+    \vspace{-3ex}
+    \caption{The proof rules of the sequent calculus \( \mathsf{MLL} \).}
+    \label{fig:sequent-calculus-mll}
+\end{figure}
+\begin{figure}[t]
+    \begin{equation*}
+        \dfrac{\vdash \Gamma \qquad \vdash \Delta}{\vdash \Gamma, \Delta}(\mathsf{Mix}).
+    \end{equation*}
+    \vspace{-3ex}
+    \caption{The rule \( \mathsf{Mix} \).}
+    \label{fig:mix-rule}
+\end{figure}
+A proof is \emph{cut-free} if it does not use the \( \mathsf{Cut} \) rule.
+
+A \emph{proof structe} \( \pi \) is a triple \( (\Gamma, \Delta, \Phi) \) where \( \Gamma \) is a sequent, \( \Delta \) is a sequent of the form \( A_1, A_1^{\bot}, A_2, A_2^{\bot}, \dots, A_n, A_n^{\bot} \) and \( \Phi \) is a \emph{linking} on \( \Gamma,\Delta \), which is a bijection on occurrences of literals in \( \Gamma,\Delta \) such that (1) \( \Phi \) maps an occurrence of \( \PropVar \) to an occurrence of \( \PropVar^{\bot} \) and (2) \( \Phi \circ \Phi = \ident \).
+A \emph{cut-free proof structure} is a proof structure with the empty \( \Delta \).
+For \( \pi = (\Gamma, \Delta, \Phi) \), we write \( \pi \vdash \Gamma \) and call it a proof structure of \( \Gamma \).
+\tk{A graphical presentation of a proof structure.}
+
+A sequent calculus proof induces a proof structure.
+\tk{to do: define proof structures; define the structure associated to a proof; define the sequentilisability}
+
+However, the converse does not hold: there exists a proof structure that cannot be obtained from a sequent calculus proof.
+A proof structure is \emph{sequentialisable} or \emph{correct} if it comes from a sequent calculus proof.
+An important problem here is to characterise sequentialisable proof structures.
+Such a condition is called a \emph{correctness criterion} and many correctness criteria have been known~\tk{to do: citation}.
+
+\emph{Danos-Regnier criterion} is a famous correctness criterion.\tk{citation}
+A \emph{Danos-Regnier switching} is a choice of left/right for each occurrence of \( \llpar \).
+The graph associated to a Danos-Regnier switching is obtained by removing every edge between a \( \llpar \)-node and its unchosen child.
+\begin{theorem}[Danos and Regnier~\cite{Danos1989}]\label{thm:danos-regnier}
+    A proof structure is correct with respect to \( \mathsf{MLL} \) if and only if, for every Danos-Regnier switching, the associated graph is a tree.
+\end{theorem}
+\begin{theorem}[\tk{todo: citation}]\label{thm:weak-danos-regnier}
+    A proof structure is correct with respect to \( \mathsf{MLL+Mix} \) if and only if, for every Danos-Regnier switching, the associate graph is acyclic.
+\end{theorem}
+\tk{to do: add examples}
+
+
+\subsection{Semantics of Proof Structures}
+We define the interpretation of a proof structure.
+A standard model of \( \mathsf{MLL} \) is a \( * \)-autonomous category, but this structure is insufficient to interpret incorrect proof structures.
+So we use a compact closed category to interpret proof structures.
+Fortunately, \( \ProfCat \) (as well as \( \ProfCat_{\omega} \)) is compact closed, so this approach works for our setting.
+
+\tk{to do: give an interpretation of MLL proof structure.}
+\tk{Show the coherence by giving a direct interpretation (= \emph{experiments}) and comparing it with the standard interpretation}
+
+
+A \emph{creed assignment} \( \varrho \) is a mapping from propositional variables to groupoids with creeds.
+We write \( |\varrho| \) for the induced \emph{groupoid assignment}, i.e.~a mapping from positional variables to groupoinds.
+
+The interpretation of a proof structure is defined by induction on the number of nodes.
+\tk{to do}
+
+The definition of this semantics depends not on the proof structures themselves but on the way they are constructed; however, it is in fact well-defined with respect to the proof structures. This follows from the coherence of compact closed categories. Here, partly for convenience in later discussions, we demonstrate this by providing a direct interpretation from the proof structures. This direct interpretation corresponds to the concept of Girard's experiment.
+
+
+\subsection{Creed and Kit as Correctness}
+We characterise the correctness of a proof structer \( \pi \vdash \Gamma \) in terms of creed/kit.
+The proof structure \( \pi \) induces a profunctor \( \sem{\pi}_\varrho \colon I \profarrow \sem{\Gamma}_\varrho \), given an interpretation \( \varrho \) of propositional variables.
+We associate a Boolean creed to \( \varrho(\PropVar) \) for each propositional variable \( \PropVar \), resulting in an assignment \( \hat{\varrho} \) of propositional variables in \( \SProf \).
+We check whether \( \sem{\pi}_\varrho \) is stable, i.e.~whether \( \sem{\pi}_\varrho \in \SProf(I, \sem{\Gamma}_{\hat{\varrho}}) \).
+The proof structure passes this test if the interpretation is stable for every choice of \( \varrho \) and \( \hat{\varrho} \).
+
+\begin{definition}[Creed-Kit criterion]
+    A cut-free proof structure \( \pi \) satsifies the \emph{creed-kit criterion} if
+    \begin{quote}
+        \( \sem{\pi}_{\varrho} \models \sem{\Gamma}_{\hat{\varrho}} \) for every assignment \( \hat{\varrho} \) of propositional variables in \( \SProf \).
+        \tk{to do: introduce the notation}
+    \end{quote}
+    Here \( \varrho \) is an assiment of propositional variables in \( \ProfCat \) induced by \( \hat{\varrho} \).
+    %
+    \qed
+\end{definition}
+
+\begin{theorem}\label{thm:creed-kit-correctness-without-cut}
+    A cut-free proof structure is correct with respect to \( \mathsf{MLL+Mix} \) if and only if it satsifies the creed-kit criterion.
+\end{theorem}
+\begin{proof}
+    The left-to-right direction is trivial since \( \SProf \) is a model of \( \mathsf{MLL+Mix} \).
+    We prove the converse.
+
+    Assume an incorrect proof structure \( \pi \).
+    By \cref{thm:weak-danos-regnier}, there exists a Danos-Regnier switching of \( \pi \) such that the associated graph has a cycle.
+    Fix a Danos-Regnier switching with a cycle in the associated groph and choose a node \( N \) such that (1) it is involved in a cycle and that (2) it is a root or its parent is not involved in any cycle.\tk{add a figure}
+    We can assume without loss of generality that \( N \) is reachable from a root in the associated graph; if it is not reachable, change the switching in the unique path from \( N \) to its root in the syntax tree.\tk{add a figure}
+    We search the associated graph starting from \( N \) in the depth-first mannar by the following rules:
+    \begin{enumerate}
+        \item 
+        Each edge is traversed at most twice (at once in each direction).
+        \item
+        If the destination of an edge being traversed is a node that has already been visited, we immediately go back the edge (without further explorating the destination at this moment).
+        \item
+        If the current node is a \( \otimes \)-node and there are multiple unexplored edges from the node, the next edge is chosen based on the following priority: the edge leading to the left child, the edge leading to the right child, and finally, the edge leading to the parent.
+    \end{enumerate}
+    For each traverssed edge, we record the direction in which it was first traversed.
+    \tk{add a figure}
+
+    \begin{claim*}
+        The start node \( N \) must be annotated as follows: \tk{add a figure}
+    \end{claim*}
+    \begin{proof}
+        \tk{to do: here}
+    \end{proof}
+\end{proof}
+
+
+
+\subsection{Matrix-Based Correctness}
+As we have seen in \cref{sec:matrix}, creeds and kits are closely related to the functoriality of the matrix representation.
+So the correctness criterion (\cref{thm:creed-kit-correctness-without-cut}) based on creeds/kits suggests a correctenss criterion based on the well-behavedness of the matrix representation.
 
 \begin{theorem}
-    Let \( \pi \) be a cut-free proof structure for \textsf{MLL+MIX} (without unit).
-    It is correct if and only if the interpretation \( \sem{\pi}_\varrho \) in \( \mathbf{Prof} \) satisfies the creed-kit criterion for every \( \varrho \).
-    % An \textsf{MLL} proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for \textsf{MLL+MIX}.
+    An \(\mathsf{MLL}\) proof structure \( \pi \vdash A_1, \dots, A_n \) is a correct proof-net for \( \mathsf{MLL+MIX} \) if and only if, for every substitution \( \vartheta \) of propositional variables in \( \pi \) and every correct proof-net \( \xi \vdash (A_i\vartheta)^{\bot} \), the proof-structure \( \mathsf{cut}(\pi\vartheta, \xi) \vdash (A_1, \dots, A_{i-1}, A_{i+1}, \dots, A_n)\vartheta \) is matrixable\tk{to do: give a terminology}. 
 \end{theorem}
-
-
-\begin{theorem}
-    An MLL proof structure (without unit) \( \pi \) is a correct proofnet for MLL + MIX if and only if, for every substitution \( \vartheta \) of propositional variables in \( \pi \) and every correct proof-net \( \pi' \), \( \rsem{\mathsf{cut}(\pi\vartheta, \pi')} = \MatTrans{\sem{\mathsf{cut}(\pi\vartheta, \pi')}} \). 
-\end{theorem}
-
-\tk{to do: creed-kit criterion for non-cut-free proof structures}
 
 \begin{corollary}
     \( \MatTrans{\sem{\pi}} = \rsem{\pi} \) for every sequent calculus proof \( \pi \) of LL + MIX.

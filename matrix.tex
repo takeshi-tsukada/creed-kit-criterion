@@ -1,4 +1,5 @@
 \section{Functoriality of Matrix Representation}
+\label{sec:matrix}
 The profunctor interpretations of \( \lambda \)-terms and proof nets exhibit a special form of symmetry action, and we have seen that this property can be expressed through the notions of creed~\cite{Taylor1989} and kit~\cite{Fiore2024}.
 Taylor's creed is inspiced by stable domain theory, and kit by Fiore et~al.{} is motivated by the exploration of a cartesian closed category involving polynomial functors.
 Both concepts arise primarily from theoretical interests.
@@ -100,8 +101,8 @@ However, this operation is not functorial.
     \qed
 \end{example}
 
-However, previous work~\cite{Tsukada2018,Clairambault} showed that \( \mathcal{M} \) is functorial on profunctors definable by \( \lambda \)-terms.
-\begin{theorem}[{\cite{Tsukada2018}, \cite{Clairambault}}]
+However, previous work~\cite{Tsukada2018,Clairambault2024} showed that \( \mathcal{M} \) is functorial on profunctors definable by \( \lambda \)-terms.
+\begin{theorem}[{\cite{Tsukada2018}, \cite{Clairambault2024}}]
     Assume simply-typed \( \lambda \)-terms \( x \colon \tau \vdash t \colon \tau' \) and \( y \colon \tau' \vdash t' \colon \tau'' \).
     Then \( \MatTrans{\sem{t'}_{\ProfCat} \circ \sem{t}_{\ProfCat}} = \MatTrans{\sem{t'}_{\ProfCat}} \circ \MatTrans{\sem{t}_{\ProfCat}} \).
     %
@@ -215,14 +216,22 @@ Here the action is free if \( f \mapsto (y \cdot f, f^{-1} \cdot x) \) is inject
 % \end{proof}
 
 \tk{to do: define \( \SProf_{\omega} \)}
+As a consequence, \( \mathcal{M} \) is a functor from the category \( \SProf_{\omega} \) of stable profunctors (on locally finite groupoids) to \( \WRel_{[0,\infty]} \).
+A direct calculation shows that \( \mathcal{M} \) preserves the LL structures.
 \begin{theorem}
     \( \mathcal{M} \) is a functor from \( \SProf_{\omega} \) to \( \WRel_{[0,\infty]} \).
     It preserves all LL structures.
     %
     \qed
 \end{theorem}
-
-This result can be straightforwardly extended to the weighted setting in \cite{Tsukada2018}.
+So the matrix representation is usable for LL proofs, extending the previous result on \( \lambda \)-terms to arbitrary LL proofs.
+It is easy to see some extensions are acceptable:
+\begin{itemize}
+    \item Since the category \( \SProf \) of stable profunctors admits the \( \mathsf{MIX} \) rule, the above observation is applicable to proofs possibly with \( \mathsf{MIX} \).
+    \item Since the sum \( \coprod_i F_i \) of stable profnuctors \( F_i \) is stable, the above observation is applicable to proofs/programs with non-deterministic branching.
+    \item It is also applicable to programs with the fixed-point combinator \( \mathbf{Y} \).
+    \item This result can be straightforwardly extended to the weighted setting in \cite{Tsukada2018}.
+\end{itemize}
 
 
 
