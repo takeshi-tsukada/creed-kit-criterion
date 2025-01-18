@@ -1,4 +1,5 @@
 \section{Functoriality of Matrix Representation}
+This section shows the connection between the functoriality of the matrix representation of profunctors and creeds/kits.
 
 \newcommand{\MatTrans}[1]{\mathcal{M}({#1})}
 \newcommand{\rsem}[1]{(\!|{#1}|\!)}
@@ -132,7 +133,13 @@ Note that the freeness of the action \( (y,x) \mapsto (y \cdot f, f^{-1} \cdot x
     \qed
 \end{theorem}
 
+\newcommand{\StableProf}{\mathbf{StableProf}}
+\begin{corollary}
+    \( \MatTrans{{-}} \) is a functor from \( \StableProf \) to \( \WRel_{[0,\infty]} \).
+    It preserves all LL structures.
+    %
+    \qed
+\end{corollary}
 
-
-
+This result can be straightforwardly extended to the weighted setting in \cite{Tsukada2018}.
 
