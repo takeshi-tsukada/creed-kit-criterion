@@ -36,7 +36,7 @@ If \( F(0) = \emptyset \), the generating series of the substitution is the subs
     \widehat{G}(\widehat{F}(x)).
 \end{equation*}
 However, the condition \( F(0) = \emptyset \) is necessarily.
-\begin{example}
+\begin{example}\label{eg:matrix:species-counterexample}
     Let \( F \) be the species defined by \( F(0) \defeq \{ a, b \} \) and \( F(n) \defeq \emptyset \) for every \( n \ge 0 \).
     Let \( G \) be the species defined by \( G(2) \defeq 1 \) and \( G(n) \defeq \emptyset \) for every \( n \neq 2 \).
     Then \( \widehat{F}(x) = 2 \) and \( \widehat{G}(y) = y^2/2 \).
@@ -47,9 +47,33 @@ However, the condition \( F(0) = \emptyset \) is necessarily.
     %
     \qed
 \end{example}
+\tk{confer: Joyal, definition 7, Intro-Species text}
 
-\newcommand{\TerminalCategory}{\mathbf{1}}
-\begin{example}
+
+For simplicity, we assume \( \Grp \), \( \Grpb \) and \( \Grpc \) are skeletal.
+\begin{equation*}
+    \MatTrans{F}_{a,b}
+    \quad\defeq\quad
+    \dfrac{\# F(a,b)}{\# \Grp(a,a)}.
+\end{equation*}
+The set \( F(a,b) \) can be infinite, so \( \MatTrans{F}_{a,b} \in [0, \infty] \).\tk{to do: notation}
+\begin{remark}
+    A species \( F \colon \FinSet \longrightarrow \FinSet \) can be seen as a profunctor \( F \colon {!}I \profarrow I \).
+    The generating series \( \widehat{F}(x) \) can be written in terms of the matrix representation as \( \widehat{F}(x) = \sum_{n = 0}^{\infty} \MatTrans{F}_{n, \star}\, x^n \), where \( n = \langle \overbrace{\star, \dots, \star}^n \rangle \in {!}I \) and \( \star \) is the unique object of \( I \).
+    So \( \MatTrans{F} \) is the vector consisting of coefficients of the generating series \( \widehat{F}(x) \).
+    %
+    \qed
+\end{remark}
+
+% \( \mathcal{M} \colon \Object(\Prof) \longrightarrow \Object(\WRel_{[0,\infty]}) \) is defined by
+Let \( \mathcal{M}(\Grp) \) be the set of equivalence classes of \( \Object(\Grp) \). 
+Then \( \mathcal{M} \) maps objects of \( \Prof \) to objects of \( \WRel_{[0,\infty]} \) and morphisms of \( \Prof \) to morphisms of \( \WRel_{[0,\infty]} \).
+However, this operation is not functorial.
+\Cref{eg:matrix:species-counterexample} suggests the failure, and \cref{eg:matrix:profunctor-counterexample} is a concrete counterexample.
+
+
+\newcommand{\TerminalCategory}{I}
+\begin{example}\label{eg:matrix:profunctor-counterexample}
     Let \( G \) be a finite group, \( H \) be its subgroup, \( \Grp \) be a single-object groupoid with \( \Grp(a, a) = G \), and \( \eta \colon \TerminalCategory \profarrow \Grp^{\op} \times \Grp \) and \( \epsilon \colon \Grp^{\op} \times \Grp \profarrow \TerminalCategory \) be profunctors defined by \( \varphi(\star, ({-}, {+})) = \Grp({-}, {+}) \) and \( \psi(({+}, {-}), \star) = \Grp({-}, {+}) \).
     Then \( \MatTrans{\eta}_{\star, (a,a)} = \#\Grp(a,a) = \#G \) and \( \MatTrans{\epsilon}_{(a,a), \star} = (1/\#\Grp(a,a))\#\Grp(a,a) = 1 \), so \( (\MatTrans{\epsilon} \circ \MatTrans{\eta})_{\star, \star} = \#G \).
     The profunctor composition is given by \( (\epsilon \circ \eta)(\star, \star) = \big( \epsilon((a,a), \star) \times \eta(\star, (a,a)) \big) / {\sim} \), where \( (y, x) \sim (y', x') \) if and only if there exist \( g, h \in G \) such that \( y' = y \cdot (g,h) = g y h \) and \( x' = (g^{-1}, h^{-1}) \cdot x = h^{-1} x g^{-1} \).
@@ -61,7 +85,13 @@ However, the condition \( F(0) = \emptyset \) is necessarily.
     \qed
 \end{example}
 
-\tk{confer: Joyal, definition 7, Intro-Species text}
+\begin{theorem}
+    Let \( F \colon \Grp \profarrow \Grpb \) and \( G \colon \Grpb \profarrow \Grpc \).
+    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in \Grp \) and \( c \in \Grpc \).
+    %
+    \qed
+\end{theorem}
+
 
 \begin{theorem}
     % Let \( \creed \), \( \creedb \) and \( \creedc \) be groupoids with creeds.
@@ -97,7 +127,9 @@ Note that the freeness of the action \( (y,x) \mapsto (y \cdot f, f^{-1} \cdot x
 
 \begin{theorem}
     Let \( F \colon \Grp \profarrow \Grpb \) and \( G \colon \Grpb \profarrow \Grpc \).
-    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in A \) and \( c \in C \).
+    Then \( \MatTrans{G} \circ \MatTrans{F} = \MatTrans{G \circ F} \) if and only if \( \creed^{F(a, {-})} \orthogonal \creed^{G({-}, c)} \) for every \( a \in \Grp \) and \( c \in \Grpc \).
+    %
+    \qed
 \end{theorem}
 
 
