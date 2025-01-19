@@ -120,8 +120,9 @@ The proof structure passes this test if the interpretation is stable for every c
     We prove the converse.
 
     Assume an incorrect proof structure \( \pi \).
+    For simplicity, we assume \( \pi \vdash A \) for some formula \( A \); otherwise, add \( \llpar \)-nodes as many as needed to make a sequent into one formula.
     By \cref{thm:weak-danos-regnier}, there exists a Danos-Regnier switching of \( \pi \) such that the associated graph has a cycle.
-    Fix a Danos-Regnier switching with a cycle in the associated groph and choose a node \( N \) such that (1) it is involved in a cycle and that (2) it is a root or its parent is not involved in any cycle.\tk{add a figure}
+    Fix a Danos-Regnier switching with a cycle in the associated groph and choose a node \( N \) such that (1) it is involved in a cycle and that (2) the ancestors of \( N \) are not involved in any cycle.\tk{add a figure}
     We can assume without loss of generality that \( N \) is reachable from a root in the associated graph; if it is not reachable, change the switching in the unique path from \( N \) to its root in the syntax tree.\tk{add a figure}
     We search the associated graph starting from \( N \) in the depth-first mannar by the following rules:
     \begin{enumerate}
@@ -136,11 +137,320 @@ The proof structure passes this test if the interpretation is stable for every c
     \tk{add a figure}
 
     \begin{claim*}
-        The start node \( N \) must be annotated as follows: \tk{add a figure}
+        The edges to the start node \( N \) must be annotated as
+        \begin{gather*}
+            \xymatrix@C=3mm@R=3mm{
+                &  & \ar[ld] \\
+                &
+                *++[o][F-]{\otimes} \ar[ul] \ar[d] &
+                \\
+                & &
+            }
+        \end{gather*}
     \end{claim*}
-    \begin{proof}
-        \tk{to do: here}
+    \begin{proof}[Proof of the claim]\renewcommand{\qedsymbol}{$\blacksquare$}
+        According to Rule 3, the upper-left edge is explored first, so the upper-left edge is traversed in the outward direction.
+        Since this node is part of a cycle, the traversal will return to this node during the search of the upper-left part.
+        The parent is not part of any cycle, so the return will occur via the upper-left edge.
+        Again, since the parent is not part of the cycle, it cannot be reached from either the upper-left or upper-right parts (which are actually connected).
+        Therefore, the exploration of the downward part begins from this edge, and as a result, the edge is oriented downward.
     \end{proof}
+
+    \begin{claim*}
+        The orientation of a \( \otimes \)-node is one of the following:
+        \begin{gather*}
+            \xymatrix@C=3mm@R=3mm{
+                & \tiny (1) & \\
+                &
+                *++[o][F-]{\otimes} \ar[ul] \ar[ur] &
+                \\
+                & \ar[u] &
+            }
+            \quad
+            \xymatrix@C=3mm@R=3mm{
+                \ar[dr] & \tiny (2) & \\
+                &
+                *++[o][F-]{\otimes} \ar[ur] \ar[d] &
+                \\
+                & &
+            }
+            \quad
+            \xymatrix@C=3mm@R=3mm{
+                & \tiny (3) & \ar[dl] \\
+                &
+                *++[o][F-]{\otimes} \ar[ul] \ar[d] &
+                \\
+                & &
+            }
+            \\
+            \xymatrix@C=3mm@R=3mm{
+                \ar[dr] & \tiny (4) & \\
+                &
+                *++[o][F-]{\otimes} \ar[ur] &
+                \\
+                & \ar[u] &
+            }
+            \quad
+            \xymatrix@C=3mm@R=3mm{
+                & \tiny (5) & \ar[dl] \\
+                &
+                *++[o][F-]{\otimes} \ar[ul] &
+                \\
+                & \ar[u] &
+            }
+            \quad
+            \xymatrix@C=3mm@R=3mm{
+                & \tiny (6) & \\
+                &
+                *++[o][F-]{\otimes} \ar@{-}[ul] \ar@{-}[ur] \ar@{-}[d] &
+                \\
+                & &
+            }
+            \\
+            \xymatrix@C=3mm@R=3mm{
+                \ar[dr] & \tiny (7) & \\
+                &
+                *++[o][F-]{\otimes} \ar[ur] &
+                \\
+                & \ar@{..}[u] &
+            }
+            \quad
+            \xymatrix@C=3mm@R=3mm{
+                & \tiny (8) & \ar[dl] \\
+                &
+                *++[o][F-]{\otimes} \ar[ul] &
+                \\
+                & \ar@{..}[u] &
+            }
+            \quad
+            \xymatrix@C=3mm@R=3mm{
+                & \tiny (9) & \\
+                &
+                *++[o][F-]{\otimes} \ar@{-}[ul] \ar@{-}[ur] \ar@{..}[d] &
+                \\
+                & &
+            }
+        \end{gather*}
+    \end{claim*}
+    \begin{proof}[Proof of the claim]\renewcommand{\qedsymbol}{$\blacksquare$}
+        If the node is visited, its edges are not oriented (\( 6 \) or \( 9 \)).
+        If the node is visited, we consider the direction from which it was approached:
+        \begin{itemize}
+            \item
+                When approached from below:
+                According to the rules, the next traversal goes to the upper-left edge.
+                The direction of the upper-right edge is undetermined, but the shape will be either \( 1 \) or \( 5 \).
+            \item
+                When approached from the upper-left:
+                According to the rules, the next traversal goes to the upper-right edge.
+                The direction of the lower edge is undetermined (including the case that it was removed by the chosen switch), but the shape will be \( 2 \), \( 4 \) or \( 7 \).
+            \item
+                When approached from the upper-right:
+                According to the rules, the next traversal goes to the upper-left edge.
+                The direction of the lower edge is undetermined (including the case that it was removed by the chosen switch), but the shape will be \( 3 \), \( 5 \) or \( 8 \).
+                %
+                \qedhere
+        \end{itemize}
+    \end{proof}
+
+    \begin{claim*}
+        The orientation of a \( \llpar \)-node (with left branch chosen) is one of the following:
+        \begin{gather*}
+            \xymatrix@C=3mm@R=3mm{
+                & \tiny (1') & \\
+                &
+                *++[o][F-]{\llpar} \ar[ul] \ar@{..}[ur] &
+                \\
+                & \ar[u] &
+            }
+            \quad
+            \xymatrix@C=3mm@R=3mm{
+                \ar[dr] & \tiny (2') & \\
+                &
+                *++[o][F-]{\llpar} \ar[d] \ar@{..}[ur] &
+                \\
+                & &
+            }
+            \quad
+            \xymatrix@C=3mm@R=3mm{
+                & \tiny (3') & \\
+                &
+                *++[o][F-]{\llpar} \ar@{-}[ul] \ar@{-}[d] \ar@{..}[ur] &
+                \\
+                & &
+            }
+            \\
+            \xymatrix@C=3mm@R=3mm{
+                \ar[dr] & \tiny (4') & \\
+                &
+                *++[o][F-]{\llpar} \ar@{..}[ur] &
+                \\
+                & \ar@{..}[u] &
+            }
+            \quad
+            \xymatrix@C=3mm@R=3mm{
+                & \tiny (5') & \\
+                &
+                *++[o][F-]{\llpar} \ar@{-}[ul] \ar@{..}[ur] &
+                \\
+                & \ar@{..}[u]&
+            }
+        \end{gather*}
+        A similar claim holds for the right case.
+        % \begin{gather*}
+        %     \xymatrix@C=3mm@R=3mm{
+        %         &  & \\
+        %         &
+        %         *++[o][F-]{\llpar} \ar[ul] \ar@{..}[ur] &
+        %         \\
+        %         & \ar[u] &
+        %     }
+        %     \quad
+        %     \xymatrix@C=3mm@R=3mm{
+        %         \ar[dr] &  & \\
+        %         &
+        %         *++[o][F-]{\llpar} \ar[d] \ar@{..}[ur] &
+        %         \\
+        %         & &
+        %     }
+        %     \quad
+        %     \xymatrix@C=3mm@R=3mm{
+        %         &  & \\
+        %         &
+        %         *++[o][F-]{\llpar} \ar@{-}[ul] \ar@{-}[d] \ar@{..}[ur] &
+        %         \\
+        %         & &
+        %     }
+        %     \\
+        %     \xymatrix@C=3mm@R=3mm{
+        %         &  & \\
+        %         &
+        %         *++[o][F-]{\llpar} \ar[ur] \ar@{..}[ul] &
+        %         \\
+        %         & \ar[u] &
+        %     }
+        %     \quad
+        %     \xymatrix@C=3mm@R=3mm{
+        %         &  & \ar[dl] \\
+        %         &
+        %         *++[o][F-]{\llpar} \ar[d] \ar@{..}[ul] &
+        %         \\
+        %         & &
+        %     }
+        %     \quad
+        %     \xymatrix@C=3mm@R=3mm{
+        %         &  & \\
+        %         &
+        %         *++[o][F-]{\llpar} \ar@{-}[ur] \ar@{-}[d] \ar@{..}[ul] &
+        %         \\
+        %         & &
+        %     }
+        %     \\
+        %     \xymatrix@C=3mm@R=3mm{
+        %         \ar[dr] &  & \\
+        %         &
+        %         *++[o][F-]{\llpar} \ar@{..}[ur] &
+        %         \\
+        %         & \ar@{..}[u] &
+        %     }
+        %     \quad
+        %     \xymatrix@C=3mm@R=3mm{
+        %         &  & \\
+        %         &
+        %         *++[o][F-]{\llpar} \ar@{-}[ul] \ar@{..}[ur] &
+        %         \\
+        %         & \ar@{..}[u]&
+        %     }
+        %     \quad
+        %     \xymatrix@C=3mm@R=3mm{
+        %         &  & \ar[dl] \\
+        %         &
+        %         *++[o][F-]{\llpar} \ar@{..}[ul] &
+        %         \\
+        %         & \ar@{..}[u] &
+        %     }
+        %     \quad
+        %     \xymatrix@C=3mm@R=3mm{
+        %         &  & \\
+        %         &
+        %         *++[o][F-]{\llpar} \ar@{-}[ur] \ar@{..}[ul] &
+        %         \\
+        %         & \ar@{..}[u]&
+        %     }
+        % \end{gather*}
+    \end{claim*}
+    \begin{proof}[Proof of the claim]\renewcommand{\qedsymbol}{$\blacksquare$}
+        If the node is not visited, the edges are not oriented (\( 3' \) or \( 5' \)).
+        When the node was approached from the upper-left, the shape will be either \( 2' \) or \( 4' \).
+        When the node was approached from below, the shape is \( 1' \).
+    \end{proof}
+
+    % \begin{claim*}
+    %     The edge below the root note (of the syntax tree) is No outward edges are oriented upward.
+    % \end{claim*}
+    % \begin{proof}[Proof of the claim]\renewcommand{\qedsymbol}{$\blacksquare$}
+    %     Since the edges are oriented according to depth-first search, for each oriented edge \( e \), there exists a path of the directed graph that starts from \( N \) and incdules \( e \).
+    %     The starting node \( N \) is not located below any outward edge, so outward edges are never oriented upward.
+    % \end{proof}
+
+    \begin{claim*}
+        The edge below the root node is oriented downward.
+    \end{claim*}
+    \begin{proof}[Proof of the claim]\renewcommand{\qedsymbol}{$\blacksquare$}
+        Note that the edge below the starting node \( N \) is oriented downward.
+        By assumption, the path between the starting node \( N \) and the root (in the syntax tree) remains by the chosen Danos-Regnier switch.
+        Furthermore, by assumption, the ancestors of \( N \) (in the syntax tree) are not involved in any cycle.
+        Therefore, the entire path between \( N \) and its root is oriented downward.
+    \end{proof}
+    
+    Let \( \Grp \) be a single-object groupoid and \( \creed \) be a creed on \( \Grp \) such that both \( \creed(a) \) and \( \creed^{\bot}(a) \) are non-trivial, where \( a \in \Grp \) is the unique object.
+    For example, \( \Grp(a,a) = \Int_2 \times \Int_2 \), \( \creed(a) = \Int_2 \times \{ 0 \} \) and \( \creed^\bot(a) = \{ (0,0), (0,1), (1,1) \} \).
+    We choose \( p \in \creed(a) \) and \( n \in \creed^{\bot}(a) \) with \( p \neq \ident \neq n \).
+    Consider the assignment \( \hat{\varrho} \) that maps every propositional variable to the creed \( \creed \), and let \( \varrho \) be the corresponding assignment of groupoids.
+
+    We specify an element \( x \in \sem{\pi}^{\Prof}_{\varrho} \) via an experiment.
+    The object on each edge is trivial since \( \sem{A}^{\Prof}_{\varrho} \) is single-object. 
+    We assign the identity \( \ident \in \Grp(a,a) \) for each axiom link.
+
+    We give a group element \( g \) that fixes \( x \) as follows.
+    It is determined by an assignment of group elements in each end of axiom links.
+    For an axiom link oriented \( \PropVar \to \PropVar^{\bot} \), we assign \( p \to p^{-1} \).
+    For an axiom link oriented \( \PropVar \leftarrow \PropVar^{\bot} \), we assign \( n \leftarrow n^{-1} \).
+    For an axiom link with no orientation \( \PropVar - \PropVar^{\bot} \), we assign \( \ident - \ident \).
+    Since \( p \circ \ident \circ p^{-1} = n \circ \ident \circ n^{-1} = \ident \circ \ident \circ \ident = \ident \), the symmetry determined by this assignment fixes \( x \).
+
+    \begin{claim*}
+        Let \( e \) be an edge of type \( B \) and \( \creedb = \sem{B}_{\varrho}^{\SProf} \).
+        \begin{itemize}
+            \item If \( e \) is oriented downward, the group element assigned to \( e \) belongs to \( \creed^\bot(b)\setminus\{\ident\} \) (where \( b \) is the unique object).
+            \item If \( e \) is not oriented, the group element assigned to \( e \) belongs to \( \creed^\bot(b) \) (where \( b \) is the unique object).
+        \end{itemize}
+    \end{claim*}
+    \begin{proof}[Proof of the claim]\renewcommand{\qedsymbol}{$\blacksquare$}
+        By easy induction (starting from the leaves of the syntax tree).
+        We need to check the cases \( (2) \), \( (3) \), \( (6) \), \( (7) \), \( (8) \) and \( (9) \) for \( \otimes \)-nodes and \( (2') \), \( (3') \), \( (4') \) and \( (5') \) for \( \llpar \)-nodes.
+        %
+        Note that
+        \begin{itemize}
+            \item
+                If \( \gamma_1 \in \creedc_1^{\bot}(c_1)\setminus\{\ident\} \) or \( g_2 \in \creedc_2^{\bot}(c_2)\setminus\{\ident\} \), then \( (\gamma_1, \gamma_2) \in (\creedc_1 \otimes \creedc_2)^{\bot}(c_2, c_2)\setminus\{\ident\} \).
+                This explains the cases \( (2) \) and \( (3) \).
+            \item
+                If \( \gamma_1 \in \creedc_1^{\bot}(c_1) \) and \( g_2 \in \creedc_2^{\bot}(c_2) \), then \( (\gamma_1, \gamma_2) \in (\creedc_1 \otimes \creedc_2)^{\bot}(c_2, c_2) \).
+                This explains the cases \( (6) \), \( (7) \), \( (8) \) and \( (9) \).
+            \item
+                If \( \gamma_1 \in \creedc_1^{\bot}(c_1)\setminus\{\ident\} \) and \( g_2 \in \creedc_2^{\bot}(c_2) \), then \( (\gamma_1, \gamma_2) \in (\creedc_1 \llpar \creedc_2)^{\bot}(c_2, c_2)\setminus\{\ident\} \).
+                This explains the case \( (2') \).
+            \item
+                If \( \gamma_1 \in \creedc_1^{\bot}(c_1) \) and \( g_2 \in \creedc_2^{\bot}(c_2) \), then \( (\gamma_1, \gamma_2) \in (\creedc_1 \llpar \creedc_2)^{\bot}(c_2, c_2) \).
+                This explains the cases \( (3') \), \( (4') \), and \( (5') \).
+                %
+                \qedhere
+        \end{itemize}
+    \end{proof}
+
+    Since the edge below the root node is oriented downward, \( g \) belongs to the dual and is not the identity.
+    Hence is violates the creed. 
 \end{proof}
 
 
