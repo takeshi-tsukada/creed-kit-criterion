@@ -418,6 +418,7 @@ The proof structure passes this test if the interpretation is stable for every c
     For an axiom link oriented \( \PropVar \leftarrow \PropVar^{\bot} \), we assign \( n \leftarrow n^{-1} \).
     For an axiom link with no orientation \( \PropVar - \PropVar^{\bot} \), we assign \( \ident - \ident \).
     Since \( p \circ \ident \circ p^{-1} = n \circ \ident \circ n^{-1} = \ident \circ \ident \circ \ident = \ident \), the symmetry determined by this assignment fixes \( x \).
+    \tk{add figure}
 
     \begin{claim*}
         Let \( e \) be an edge of type \( B \) and \( \creedb = \sem{B}_{\varrho}^{\SProf} \).
@@ -458,6 +459,11 @@ The proof structure passes this test if the interpretation is stable for every c
 \subsection{Matrix-Based Correctness}
 As we have seen in \cref{sec:matrix}, creeds and kits are closely related to the functoriality of the matrix representation.
 So the correctness criterion (\cref{thm:creed-kit-correctness-without-cut}) based on creeds/kits suggests a correctenss criterion based on the well-behavedness of the matrix representation.
+
+\begin{definition}[Matrix criterion]
+    A proof structure \( \pi \) is \emph{functorially matrix representable} or \emph{FMR} if \( \sem{\pi}_{\MatTrans{\varrho}}^{\WRel_{[0,\infty]}} = \MatTrans{\sem{\pi}_{\varrho}^{\ProfCat}} \) for every assigment \( \varrho \) of groupoids to propositional variables.
+    A proof structure \( \pi \) satisfies the \emph{FMR criterion} if \( \pi \) surrounded by 
+\end{definition}
 
 \begin{theorem}
     An \(\mathsf{MLL}\) proof structure \( \pi \vdash A_1, \dots, A_n \) is a correct proof-net for \( \mathsf{MLL+MIX} \) if and only if, for every substitution \( \vartheta \) of propositional variables in \( \pi \) and every correct proof-net \( \xi \vdash (A_i\vartheta)^{\bot} \), the proof-structure \( \mathsf{cut}(\pi\vartheta, \xi) \vdash (A_1, \dots, A_{i-1}, A_{i+1}, \dots, A_n)\vartheta \) is matrixable\tk{to do: give a terminology}. 

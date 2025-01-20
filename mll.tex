@@ -1,11 +1,48 @@
-\section{Correctness for $\mathsf{MLL+Mix}$ with $\mathsf{Cut}$}
+\section{Correctness of $\mathsf{Cut}$ via Totality}\label{sec:cut}
+This section studies a correctness criterion for proof structures possibly with \( \mathsf{Cut} \).
+For ``geometric'' correctness criteria such as Danos-Regnier, the cut is not difficult to handle: actually, the acyclicity (or treeness) for every Danos-Regnier switch characterises correct proof structures even in the presense of \( \mathsf{Cut} \).
+However, correctness criteria based on semantics face a significant challenge, as we shall see in \cref{sec:cut:challenge}.
+
+\subsection{Challenge}
+\label{sec:cut:challenge}
+
+
+\begin{proposition}
+    Let \( \pi \vdash \Gamma \) be a proof structure, \( \PropVar \) is a propositional variable appearing in \( \pi \), and \( \bigcirc \) is a loop of type \( \PropVar \).
+    Then \( \sem{\pi}_\varrho = \sem{\pi\;\bigcirc}_\varrho \) for every assignment \( \varrho \) in \( \Set \).
+\end{proposition}
+\begin{proof}
+    If \( \varrho(\PropVar) \neq \emptyset \), then \( \sem{\bigcirc}_{\varrho} = \ident_I \), and hence \( \sem{\pi\;\bigcirc}_{\varrho} = (r^{-1};\sem{\pi}_\varrho \otimes \sem{\bigcirc}_{\varrho}; r) = \sem{\pi}_{\varrho} \), where \( r \) is the right unitor.
+    If \( \varrho(\PropVar) = \emptyset \), then \( \sem{\Gamma}_{\PropVar} \) is the empty set; so both \( \sem{\pi}_\varrho \) and \( \sem{\pi\;\bigcirc}_\varrho \) are the unique morphism in \( \Rel(I, \emptyset) \).
+\end{proof}
+Therefore, the ``coherence'' of the relational interpretation, which is a correctness criterion for the cut-free case~\cite{coherence}, is not sufficient in the presense of \( \mathsf{Cut} \).
+
+A similar argument shows that the creed-kit criterion is also insufficient.
+\begin{proposition}\label{prop:cut:loop-in-profunctor}
+    Let \( \pi \vdash \Gamma \) be a proof structure, \( \PropVar \) is a propositional variable appearing in \( \pi \), and \( \bigcirc \) is a loop of type \( \PropVar \).
+    Then, for every groupoid assignment \( \varrho \), there exists a set \( Z_\varrho \) such that \( \sem{\pi\;\bigcirc}_\varrho = Z_{\varrho} \times \sem{\pi}_\varrho \).
+    Here \( (F \times Z)(a,b) \defeq F(a,b) \times Z \) and \( (F \times Z)(\alpha, \beta)(x,z) \defeq (F(\alpha,\beta)(x), z) \).
+\end{proposition}
+\begin{proof}
+    Let \( Z_\varrho = \sem{\bigcirc}_{\varrho}(\star, \star) \).
+\end{proof}
+
+\begin{corollary}\label{cor:cut:failure-of-creed-kit}
+    The creed-kit criterion is not a correctness criterion in the presense of \( \mathsf{Cut} \).
+\end{corollary}
+\begin{proof}
+    Since \( \Creed{F \times Z} \subseteq \Creed{F} \), if \( \sem{\pi}_{\varrho} \) is stable, so is \( \sem{\pi}_\varrho \times Z_\varrho \cong \sem{\pi\,\bigcirc} \) by \cref{prop:cut:loop-in-profunctor}. 
+\end{proof}
+
+\subsection{Totality and Coherence in $\ProfCat$}
 
 
 
+\subsection{Correctness in the Presense of $\mathsf{Cut}$}
 
 \begin{theorem}
-    Let \( \pi \) be a proof structure for \textsf{MLL+MIX+CUT}.
-    It is correct if and only if the interpretation \( \sem{\pi}_{|\varrho|} \) in \( \ProfCat \) is coherent for every assignemnt \( \varrho \) of groupoids with coherence.
+    Let \( \pi \) be a proof structure possibly with \( \mathsf{Cut} \).
+    It is correct with respect to \( \mathsf{MLL+Mix} \) if and only if the interpretation \( \sem{\pi}_{|\varrho|} \) in \( \ProfCat \) is coherent for every assignemnt \( \varrho \) of groupoids with coherence.
     % An \textsf{MLL} proof structure (without unit) satisfies the creed-kit criterion if and only if it is a correct proof-net for \textsf{MLL+MIX}.
     A similar statement holds for the totality.
 \end{theorem}

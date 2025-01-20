@@ -47,3 +47,46 @@ We write \( \CohProf \) and \( \TotProf \) for the tight orthogonality categorie
     %
     \qed
 \end{proposition}
+
+\begin{lemma}\label{lem:definability:totality-and-bijection}
+    Let \( \Grp \) be a single-object groupoid, \( a \in \Grp \) and \( G = \Grp(a,a) \).
+    Let \( \creed \) be a trivial totality on \( \Grp \), i.e.~\( \creed(a) = \{ G \} \) and \( \creed^{\bot}(a) = \{ \{ \ident \} \} \).
+    Let \( F \colon \creed \profarrow \creed \).
+    \begin{itemize}
+        \item There exists a gpoup automorphism \( \varpi \colon G \longrightarrow G \) such that \( F \) is induced by the graph of \( \varphi \), i.e.~\( F \cong \InducedProf{K} \) with \( K = \{ (\alpha^{-1}, \varpi(\alpha)) \mid \alpha \in G \} \).
+        \item Furthermore, the automorphism \( \varpi \) is an inner automorphism if and only if \( F \cong \ident_{\Grp} \).
+    \end{itemize}
+    Here, an inner automorphism is a function of the form \( G \ni x \mapsto (g \cdot x \cdot g^{-1}) \in G \) for a fixed \( g \in G \). 
+\end{lemma}
+\begin{proof}
+    \tk{to do: just a calculation}
+\end{proof}
+
+\begin{lemma}
+    Let \( (F_\Grp)_\Grp \) be a family \( F_\Grp \colon \Grp \profarrow \Grp \) parameterised by groupoid \( \Grp \) such that
+    \begin{itemize}
+        \item for every functor \( \varphi \colon \Grp \longrightarrow \Grpb \), the following square
+        \begin{equation*}
+            \xymatrix{
+                \Grp \ar[d]_\varphi \ar[r]|{|}^{F_\Grp} \ar@{}[dr]|{\Downarrow} & \Grp \ar[d]^\varphi \\
+                \Grpb \ar[r]|{|}_{F_\Grpb} & \Grpb
+            }
+        \end{equation*}
+        has a filling \( 2 \)-cell (in the double category of profunctors), and
+        \item \( F_\Grp \colon \creed \profarrow \creed \) for every totality groupoid \( \creed \) with underlying groupoid \( \Grp \).
+    \end{itemize}
+    Then \( F_\Grp \cong \ident_{\Grp} \) for every \( \Grp \).
+\end{lemma}
+\begin{proof}
+    We first prove the claim for single-object groupoids.
+    Then the result can be easily extended to many-object groupoids by using the naturality of the family.
+    \tk{to do: fill the details}
+
+    Let \( \Grp \) be a single-object groupoid and \( a \in \Grp \).
+    Let \( \creed \) be a totality groupoid defined by \( \creed(a) = \{ \Grp(a,a) \} \) and \( \creed^{\bot}(a) = \{ \{ \ident \} \} \).
+    Then \( F_{\Grp} \colon \creed \profarrow \creed \) shows that \( F_{\Grp} = \InducedProf{\{ (\alpha^{-1}, \varpi(\alpha)) \mid \alpha \in \Grp(a,a) \}} \) for some group automorphism \( \varpi \colon \Grp(a,a) \longrightarrow \Grp(a,a) \).
+    The naturality condition implies that, for every group embedding \( \delta \colon \Grp(a,a) \longrightarrow \Grpb(b,b) \), the automorphism \( \varpi \) can be extended to an automorphism of \( \Grpb(b,b) \).
+    By a result, this means that \( \varpi \) is an inner automorphism.
+    This means that \( F_\Grp \cong \ident_{\Grp} \).
+\end{proof}
+

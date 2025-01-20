@@ -1,7 +1,54 @@
-\section{Full completeness?}
+\section{Full Definability}
 Try to give a full completeness result.
 It suffices to find a class of profunctors that can be obtained as an interpretation of proof-structure (not necessarily correct).
 Then this condition together with the creed-kit criterion gives a characterisation of denotations of correct proof-structures.
+
+
+\subsection{Logical Characterisation of Definability}
+
+\tk{to do: define the logicality}
+
+\begin{theorem}\label{thm:definability}
+    Let \( A(\vec{\PropVar}) \) be an MLL formula and \( F = (F_{\vec{\Grp}})_{\vec{\Grp}} \) be a family of profunctors \( F_{\vec{\Grp}} \colon I \profarrow A(\vec{\Grp}) \).
+    It is definable by a correct \( \mathsf{MLL+Mix} \) proof-net if and only if it is logical and total.
+    % Let \( F = (F_{\vec{\Grp}})_{\vec{\Grp}} \) be a logical family of total profunctors.
+    % Then \( F \) is definable by an \( \mathsf{MLL+Mix} \) proof-net.
+    %
+    \qed
+\end{theorem}
+
+
+\subsection{Denotations of Proof-Structures are Logical}
+
+\tk{to do: but easy}
+\begin{lemma}
+    A family induced by a proof-structure is logical.
+\end{lemma}
+
+Since the interpretation of a correct \( \mathsf{MLL+Mix} \) proof-net is total, we have completed a proof of one direction of \cref{thm:definability}.
+
+
+\subsection{Extraction of a Proof-Structure}
+
+Assume \( A(\PropVar_1,\dots,\PropVar_k) = B(\PropVarb_1, \PropVarb_1^\bot, \dots, \PropVarb_n, \PropVarb_n^{\bot}) \), where \( \PropVarb_j = \PropVar_{i_j} \) for some \( 1 \le i_j \le k \).
+So \( \sem{B}_{\varrho} = \varrho(\PropVarb_1) \times \varrho(\PropVarb_1)^{\op} \times \dots \times \varrho(\PropVar_n) \times \varrho(\PropVar_n)^{\op} \).
+
+\tk{to do: cite an old LICS paper}
+\begin{lemma}
+    \( F_\varrho(b_1, b'_1, \dots, b_n, b'_n) \neq \emptyset \) if and only if \( b_j = b'_j \) for every \( 1 \le j \le n \).
+    %
+    \qed
+\end{lemma}
+
+\begin{lemma}
+    If the comparison functor \( \varphi \) is fully faithful, then the filling \( 2 \)-cell is a natural isomorphism.
+\end{lemma}
+\begin{proof}
+    Then the comparison \( A(\varphi) \) is also fully faithful.
+    By a lemma\tk{which lemma?}, it is determined by the stabiliser group, and the stabiliser groups are related by the fully faithful functor.
+\end{proof}
+
+This section proves this theorem.
 
 \begin{theorem}
     \tk{Conjecture.  Even the statement is not concrete, as the notion of ``family'' has not yet formally given.}
